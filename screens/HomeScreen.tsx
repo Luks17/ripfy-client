@@ -1,6 +1,8 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { RootStackParamList } from "../lib/navigation/root";
+import PrimaryButton from "../components/buttons/PrimaryBtn";
+import { colors } from "../lib/ui/colors";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
@@ -11,11 +13,20 @@ function HomeScreen({ navigation }: Props) {
         <Text style={styles.mainTitle}>Ripfy</Text>
       </View>
       <View style={styles.buttonsContainer}>
-        <Button
+        <PrimaryButton
+          outerStyle={{ width: "50%" }}
+          innerStyle={styles.button}
           onPress={() => navigation.navigate("SignUp")}
-          title="Criar uma Conta"
-        />
-        <Button onPress={() => navigation.navigate("Login")} title="Entrar" />
+        >
+          Criar uma Conta
+        </PrimaryButton>
+        <PrimaryButton
+          outerStyle={{ width: "50%" }}
+          innerStyle={styles.button}
+          onPress={() => navigation.navigate("Login")}
+        >
+          Entrar
+        </PrimaryButton>
       </View>
     </View>
   );
@@ -24,6 +35,7 @@ function HomeScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
+    backgroundColor: colors.base100,
   },
   titleContainer: {
     flex: 1,
@@ -32,16 +44,18 @@ const styles = StyleSheet.create({
   },
   mainTitle: {
     fontSize: 54,
+    color: colors.accent,
   },
   buttonsContainer: {
     width: "100%",
     flexDirection: "row",
     columnGap: 10,
-    padding: 10,
+    padding: 20,
     justifyContent: "center",
   },
   button: {
-    width: "100%",
+    paddingVertical: 16,
+    backgroundColor: colors.secondary,
   },
 });
 
