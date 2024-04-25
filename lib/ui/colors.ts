@@ -1,1 +1,22 @@
-export const colors = {};
+export const colors = {
+  base100: "#282A36",
+  base200: "#232530",
+  base300: "#1F202A",
+  baseContent: "#F8F8F2",
+  primary: "#FF79C6",
+  primaryContent: "#F8F8F2",
+  secondary: "#BD93F9",
+  secondaryContent: "#F8F8F2",
+  tertiary: "#6272A4",
+  tertiaryContent: "#F8F8F2",
+  accent: "#FFB86C",
+  accentContent: "#F8F8F2",
+  info: "#8BE9FD",
+  infoContent: "#F8F8F2",
+  success: "#50FA7B",
+  successContent: "#F8F8F2",
+  warning: "#F1FA8C",
+  warningContent: "#F8F8F2",
+  error: "#FF5555",
+  errorContent: "#F8F8F2",
+};
