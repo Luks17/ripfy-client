@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
+import { colors } from "../../lib/ui/colors";
 
 function CatalogScreen() {
   return (
     <View style={styles.rootContainer}>
-      <Text style={styles.mainTitle}>Catalogo</Text>
     </View>
   );
 }
@@ -13,9 +13,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-  },
-  mainTitle: {
-    fontSize: 54,
+    backgroundColor:colors.base100,
   },
 });
 

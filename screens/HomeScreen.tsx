@@ -18,7 +18,7 @@ function HomeScreen({ navigation }: Props) {
           innerStyle={styles.button}
           onPress={() => navigation.navigate("SignUp")}
         >
-          Criar uma Conta
+          Criar Conta
         </PrimaryButton>
         <PrimaryButton
           outerStyle={{ width: "50%" }}
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   mainTitle: {
-    fontSize: 54,
+    fontSize: 100,
     color: colors.accent,
   },
   buttonsContainer: {
@@ -54,8 +54,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   button: {
-    paddingVertical: 16,
+    paddingVertical: 15,
     backgroundColor: colors.secondary,
+    borderRadius: 20,
   },
 });
 

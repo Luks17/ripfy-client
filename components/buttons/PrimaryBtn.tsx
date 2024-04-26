@@ -44,7 +44,7 @@ function PrimaryButton({
 
 const styles = StyleSheet.create({
   outerContainer: {
-    borderRadius: 4,
+    borderRadius: 10,
     overflow: "hidden",
   },
   innerContainer: {
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   text: {
     color: colors.primaryContent,
     textAlign: "center",
-    fontSize: 16,
+    fontSize: 20,
   },
   pressedIos: {
     opacity: 0.75,
