@@ -5,10 +5,11 @@ import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
 import AppScreen from "./screens/AppScreen";
+import AuthContextProvider from "./store/auth-context";
 
 export default function App() {
   return (
-    <>
+    <AuthContextProvider>
       <StatusBar style="dark" />
       <NavigationContainer>
         <RootStack.Navigator>
@@ -18,6 +19,6 @@ export default function App() {
           <RootStack.Screen name="App" component={AppScreen} />
         </RootStack.Navigator>
       </NavigationContainer>
-    </>
+    </AuthContextProvider>
   );
 }
