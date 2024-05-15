@@ -10,7 +10,7 @@ import AuthContextProvider from "./store/auth-context";
 export default function App() {
   return (
     <AuthContextProvider>
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
       <NavigationContainer>
         <RootStack.Navigator>
           <RootStack.Screen name="Home" component={HomeScreen} />
