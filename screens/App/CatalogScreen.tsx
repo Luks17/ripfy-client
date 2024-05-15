@@ -2,10 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { colors } from "../../lib/ui/colors";
 
 function CatalogScreen() {
-  return (
-    <View style={styles.rootContainer}>
-    </View>
-  );
+  return <View style={styles.rootContainer}></View>;
 }
 
 const styles = StyleSheet.create({
@@ -13,7 +10,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor:colors.base100,
+    backgroundColor: colors.base100,
   },
 });
 

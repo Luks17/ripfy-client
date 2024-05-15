@@ -4,7 +4,6 @@ import { RootStackParamList } from "../lib/navigation/root";
 import PrimaryButton from "../components/buttons/PrimaryBtn";
 import { colors } from "../lib/ui/colors";
 
-
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
 function LoginScreen({ navigation }: Props) {

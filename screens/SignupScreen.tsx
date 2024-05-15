@@ -4,10 +4,9 @@ import { RootStackParamList } from "../lib/navigation/root";
 import PrimaryButton from "../components/buttons/PrimaryBtn";
 import { colors } from "../lib/ui/colors";
 
-
 type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
 
-function SingupScreen({ navigation }: Props) {
+function SignupScreen({ navigation }: Props) {
   return (
     <View style={styles.rootContainer}>
       <Text style={styles.mainTitle}>SignUp</Text>
@@ -59,4 +58,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SingupScreen;
+export default SignupScreen;
