@@ -5,12 +5,34 @@ import PrimaryButton from "../components/buttons/PrimaryBtn";
 import { colors } from "../lib/ui/colors";
 import InputField from "../components/forms/InputField";
 import { useState } from "react";
+import { validate } from "../lib/validation/login";
+import { hasError, resetErrorStateFromField } from "../lib/validation/common";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
 function LoginScreen({ navigation }: Props) {
   const [userName, setUserName] = useState("");
   const [passwd, setPasswd] = useState("");
+  const [errors, setErrors] = useState([false, false]);
+
+  function handleSubmit() {
+    const validationErrors = validate(userName, passwd);
+    setErrors(validationErrors);
+
+    if (hasError(validationErrors)) {
+      return;
+    }
+  }
+
+  function handleUserNameInput(text: string) {
+    setUserName(text);
+    setErrors((old) => resetErrorStateFromField(old, 0));
+  }
+
+  function handlePasswdInput(text: string) {
+    setPasswd(text);
+    setErrors((old) => resetErrorStateFromField(old, 1));
+  }
 
   return (
     <View style={styles.rootContainer}>
@@ -21,22 +43,21 @@ function LoginScreen({ navigation }: Props) {
       <View style={styles.formContainer}>
         <InputField
           value={userName}
-          onInputChange={(text) => setUserName(text)}
+          onInputChange={handleUserNameInput}
           label="Nome de usuário"
-          placeholder="Roberto Carlos"
+          placeholder="Exemplo123"
+          error={errors[0]}
         />
         <InputField
           value={passwd}
-          onInputChange={(text) => setPasswd(text)}
+          onInputChange={handlePasswdInput}
           label="Senha"
           placeholder="Seu segredo"
           secure={true}
+          error={errors[1]}
         />
         <View style={styles.distanceFromTop}>
-          <PrimaryButton
-            innerStyle={styles.button}
-            onPress={() => navigation.navigate("App")}
-          >
+          <PrimaryButton innerStyle={styles.button} onPress={handleSubmit}>
             Confirmar
           </PrimaryButton>
         </View>

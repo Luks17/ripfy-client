@@ -53,8 +53,7 @@ const styles = StyleSheet.create({
   textInput: {
     color: colors.baseContent,
     borderBottomWidth: 2,
-    paddingHorizontal: 8,
-    paddingVertical: 6,
+    padding: 6,
     borderBottomColor: addOpacity(colors.baseContent),
   },
   borderInputTertiary: {
