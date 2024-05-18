@@ -14,15 +14,15 @@ function HomeScreen({ navigation }: Props) {
       </View>
       <View style={styles.buttonsContainer}>
         <PrimaryButton
-          outerStyle={{ width: "50%" }}
-          innerStyle={styles.button}
+          outerStyle={[{ width: "50%" }, styles.rounded]}
+          innerStyle={[styles.button, styles.rounded]}
           onPress={() => navigation.navigate("SignUp")}
         >
           Criar Conta
         </PrimaryButton>
         <PrimaryButton
-          outerStyle={{ width: "50%" }}
-          innerStyle={styles.button}
+          outerStyle={[{ width: "50%" }, styles.rounded]}
+          innerStyle={[styles.button, styles.rounded]}
           onPress={() => navigation.navigate("Login")}
         >
           Entrar
@@ -48,15 +48,17 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     width: "100%",
-    flexDirection: "row",
-    columnGap: 10,
+    rowGap: 10,
     padding: 20,
     justifyContent: "center",
+    alignItems: "center",
   },
   button: {
     paddingVertical: 15,
     backgroundColor: colors.secondary,
-    borderRadius: 20,
+  },
+  rounded: {
+    borderRadius: 5,
   },
 });
 

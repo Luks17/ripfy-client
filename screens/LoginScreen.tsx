@@ -1,32 +1,46 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { RootStackParamList } from "../lib/navigation/root";
 import PrimaryButton from "../components/buttons/PrimaryBtn";
 import { colors } from "../lib/ui/colors";
+import InputField from "../components/forms/InputField";
+import { useState } from "react";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
 function LoginScreen({ navigation }: Props) {
+  const [userName, setUserName] = useState("");
+  const [passwd, setPasswd] = useState("");
+
   return (
     <View style={styles.rootContainer}>
-      <Text style={styles.mainTitle}>Login</Text>
-      <TextInput
-        style={styles.textInput}
-        placeholder="JeeanGDZL"
-        placeholderTextColor={colors.base100}
-      />
-      <TextInput
-        style={styles.textInput}
-        placeholder="*******"
-        placeholderTextColor={colors.base100}
-        secureTextEntry={true} // This hides the password input
-      />
-      <PrimaryButton
-        innerStyle={styles.button}
-        onPress={() => navigation.navigate("App")}
-      >
-        Confirmar
-      </PrimaryButton>
+      <View style={styles.titleContainer}>
+        <Text style={styles.mainTitle}>Olá novamente,</Text>
+        <Text style={styles.subtitle}>Faça login para continuar</Text>
+      </View>
+      <View style={styles.formContainer}>
+        <InputField
+          value={userName}
+          onInputChange={(text) => setUserName(text)}
+          label="Nome de usuário"
+          placeholder="Roberto Carlos"
+        />
+        <InputField
+          value={passwd}
+          onInputChange={(text) => setPasswd(text)}
+          label="Senha"
+          placeholder="Seu segredo"
+          secure={true}
+        />
+        <View style={styles.distanceFromTop}>
+          <PrimaryButton
+            innerStyle={styles.button}
+            onPress={() => navigation.navigate("App")}
+          >
+            Confirmar
+          </PrimaryButton>
+        </View>
+      </View>
     </View>
   );
 }
@@ -34,27 +48,34 @@ function LoginScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
     backgroundColor: colors.base100,
+    paddingHorizontal: 30,
+  },
+  titleContainer: {
+    marginTop: 100,
+    marginBottom: 50,
   },
   mainTitle: {
-    fontSize: 54,
-    padding: 10,
+    fontSize: 42,
     color: colors.accent,
-    margin: 50,
+    fontWeight: "bold",
   },
-  textInput: {
-    width: "80%",
-    padding: 10,
-    margin: 10,
-    backgroundColor: colors.successContent,
-    borderRadius: 15,
+  subtitle: {
+    fontSize: 16,
+    color: colors.accent,
+  },
+  formContainer: {
+    backgroundColor: colors.base200,
+    padding: 40,
+    rowGap: 20,
+    borderRadius: 5,
   },
   button: {
-    borderRadius: 15,
-    margin: 20,
-    backgroundColor: colors.secondary,
+    borderRadius: 5,
+    backgroundColor: colors.primary,
+  },
+  distanceFromTop: {
+    marginTop: 12,
   },
 });
 
