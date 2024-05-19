@@ -13,7 +13,7 @@ type Value = {
 export const AuthContext = createContext<Value>({
   token: null,
   isLoggedIn: false,
-  authenticate: () => { },
+  authenticate: () => {},
 });
 
 export default function AuthContextProvider({ children }: ProviderProps) {

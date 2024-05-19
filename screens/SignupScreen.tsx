@@ -1,5 +1,11 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { RootStackParamList } from "../lib/navigation/root";
 import { useEffect, useState } from "react";
 
@@ -43,43 +49,45 @@ function SignupScreen({ navigation }: Props) {
   }
 
   return (
-    <View style={styles.rootContainer}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.mainTitle}>Seja bem-vindo,</Text>
-        <Text style={styles.subtitle}>Crie uma conta para continuar</Text>
-      </View>
-      <View style={styles.formContainer}>
-        {isError && <ErrorCard msg={failureReason!.message} />}
-        <InputField
-          value={userName}
-          onInputChange={(text) => setUserName(text)}
-          label="Nome de usuário"
-          placeholder="Seu nome no aplicativo"
-          error={errors[0]}
-        />
-        <InputField
-          value={passwd}
-          onInputChange={(text) => setPasswd(text)}
-          label="Senha"
-          placeholder="Senha bem segura"
-          secure={true}
-          error={errors[1]}
-        />
-        <InputField
-          value={confPasswd}
-          onInputChange={(text) => setConfPasswd(text)}
-          label="Confirmar Senha"
-          placeholder="Sua senha novamente"
-          secure={true}
-          error={errors[2]}
-        />
-        <View style={styles.distanceFromTop}>
-          <PrimaryButton innerStyle={styles.button} onPress={handleSubmit}>
-            Criar Conta
-          </PrimaryButton>
+    <ScrollView style={styles.rootContainer}>
+      <KeyboardAvoidingView behavior="position">
+        <View style={styles.titleContainer}>
+          <Text style={styles.mainTitle}>Seja bem-vindo,</Text>
+          <Text style={styles.subtitle}>Crie uma conta para continuar</Text>
         </View>
-      </View>
-    </View>
+        <View style={styles.formContainer}>
+          {isError && <ErrorCard msg={failureReason!.message} />}
+          <InputField
+            value={userName}
+            onInputChange={(text) => setUserName(text)}
+            label="Nome de usuário"
+            placeholder="Seu nome no aplicativo"
+            error={errors[0]}
+          />
+          <InputField
+            value={passwd}
+            onInputChange={(text) => setPasswd(text)}
+            label="Senha"
+            placeholder="Senha bem segura"
+            secure={true}
+            error={errors[1]}
+          />
+          <InputField
+            value={confPasswd}
+            onInputChange={(text) => setConfPasswd(text)}
+            label="Confirmar Senha"
+            placeholder="Sua senha novamente"
+            secure={true}
+            error={errors[2]}
+          />
+          <View style={styles.distanceFromTop}>
+            <PrimaryButton innerStyle={styles.button} onPress={handleSubmit}>
+              Criar Conta
+            </PrimaryButton>
+          </View>
+        </View>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
 

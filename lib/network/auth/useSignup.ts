@@ -18,11 +18,9 @@ export const useSignup = () => {
           "Content-Type": "application/json",
         },
       }).then(async (res) => {
-        const data: ApiResponse<void> = await res.json();
+        const resBody: ApiResponse<void> = await res.json();
 
-        if (!data.success) throw new ClientError(data.error!);
-
-        return data;
+        if (!resBody.success) throw new ClientError(resBody.error!);
       }),
   });
 };
