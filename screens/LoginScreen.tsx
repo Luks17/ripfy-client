@@ -6,7 +6,8 @@ import { colors } from "../lib/ui/colors";
 import InputField from "../components/forms/InputField";
 import { useState } from "react";
 import { validate } from "../lib/validation/login";
-import { hasError, resetErrorStateFromField } from "../lib/validation/common";
+import { hasError } from "../lib/validation/common";
+import { useLogin } from "../lib/network/auth/useLogin";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
@@ -15,6 +16,8 @@ function LoginScreen({ navigation }: Props) {
   const [passwd, setPasswd] = useState("");
   const [errors, setErrors] = useState([false, false]);
 
+  const { mutate } = useLogin();
+
   function handleSubmit() {
     const validationErrors = validate(userName, passwd);
     setErrors(validationErrors);
@@ -22,16 +25,8 @@ function LoginScreen({ navigation }: Props) {
     if (hasError(validationErrors)) {
       return;
     }
-  }
 
-  function handleUserNameInput(text: string) {
-    setUserName(text);
-    setErrors((old) => resetErrorStateFromField(old, 0));
-  }
-
-  function handlePasswdInput(text: string) {
-    setPasswd(text);
-    setErrors((old) => resetErrorStateFromField(old, 1));
+    mutate({ username: userName, pwd: passwd });
   }
 
   return (
@@ -43,14 +38,14 @@ function LoginScreen({ navigation }: Props) {
       <View style={styles.formContainer}>
         <InputField
           value={userName}
-          onInputChange={handleUserNameInput}
+          onInputChange={(text) => setUserName(text)}
           label="Nome de usuário"
           placeholder="Exemplo123"
           error={errors[0]}
         />
         <InputField
           value={passwd}
-          onInputChange={handlePasswdInput}
+          onInputChange={(text) => setPasswd(text)}
           label="Senha"
           placeholder="Seu segredo"
           secure={true}

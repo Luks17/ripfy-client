@@ -8,8 +8,3 @@ export function hasError(errors: boolean[]) {
 
   return hasError;
 }
-
-export function resetErrorStateFromField(old: boolean[], index: number) {
-  old[index] = false;
-  return old;
-}
