@@ -8,6 +8,8 @@ import { useState } from "react";
 import { validate } from "../lib/validation/login";
 import { hasError } from "../lib/validation/common";
 import { useLogin } from "../lib/network/auth/useLogin";
+import LoadingOverlay from "../components/feedback/LoadingOverlay";
+import ErrorCard from "../components/feedback/ErrorCard";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
@@ -16,7 +18,7 @@ function LoginScreen({ navigation }: Props) {
   const [passwd, setPasswd] = useState("");
   const [errors, setErrors] = useState([false, false]);
 
-  const { mutate } = useLogin();
+  const { mutate, isPending, isError, failureReason } = useLogin();
 
   function handleSubmit() {
     const validationErrors = validate(userName, passwd);
@@ -29,6 +31,10 @@ function LoginScreen({ navigation }: Props) {
     mutate({ username: userName, pwd: passwd });
   }
 
+  if (isPending) {
+    return <LoadingOverlay />;
+  }
+
   return (
     <View style={styles.rootContainer}>
       <View style={styles.titleContainer}>
@@ -36,6 +42,7 @@ function LoginScreen({ navigation }: Props) {
         <Text style={styles.subtitle}>Faça login para continuar</Text>
       </View>
       <View style={styles.formContainer}>
+        {isError && <ErrorCard msg={failureReason!.message} />}
         <InputField
           value={userName}
           onInputChange={(text) => setUserName(text)}

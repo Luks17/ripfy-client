@@ -1,5 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import Config from "../config";
+import { ClientError } from "../error";
+import { ApiResponse } from "../response";
 
 type Payload = {
   username: string;
@@ -15,6 +17,13 @@ export const useLogin = () => {
         headers: {
           "Content-Type": "application/json",
         },
-      }).then((res) => res.json()),
+      }).then(async (res) => {
+        const data: ApiResponse<void> = await res.json();
+
+        if (data.success) return data;
+        else {
+          throw new ClientError(data.error!);
+        }
+      }),
   });
 };
