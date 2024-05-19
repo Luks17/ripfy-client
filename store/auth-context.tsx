@@ -7,7 +7,7 @@ interface ProviderProps {
 type Value = {
   token: string | null;
   isLoggedIn: boolean;
-  authenticate: (token: string) => void;
+  authenticate: (token: string | null) => void;
 };
 
 export const AuthContext = createContext<Value>({
@@ -19,7 +19,7 @@ export const AuthContext = createContext<Value>({
 export default function AuthContextProvider({ children }: ProviderProps) {
   const [authToken, setAuthToken] = useState<null | string>(null);
 
-  function authenticate(token: string) {
+  function authenticate(token: string | null) {
     setAuthToken(token);
   }
 

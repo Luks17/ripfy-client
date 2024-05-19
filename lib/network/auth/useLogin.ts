@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import Config from "../config";
 import { ClientError } from "../error";
 import { ApiResponse } from "../response";
+import { parseAuthCookie } from "../cookies";
 
 type Payload = {
   username: string;
@@ -19,10 +20,11 @@ export const useLogin = () => {
         },
       }).then(async (res) => {
         const data: ApiResponse<void> = await res.json();
+        const authToken = parseAuthCookie(res.headers);
 
         if (!data.success) throw new ClientError(data.error!);
 
-        return data;
+        return authToken;
       }),
   });
 };

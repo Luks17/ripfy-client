@@ -6,10 +6,11 @@ import LoadingOverlay from "../components/feedback/LoadingOverlay";
 import ErrorCard from "../components/feedback/ErrorCard";
 import InputField from "../components/forms/InputField";
 import { colors } from "../lib/ui/colors";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { validate } from "../lib/validation/login";
 import { hasError } from "../lib/validation/common";
 import { useLogin } from "../lib/network/auth/useLogin";
+import { AuthContext } from "../store/auth-context";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
@@ -18,7 +19,8 @@ function LoginScreen({ navigation }: Props) {
   const [passwd, setPasswd] = useState("");
   const [errors, setErrors] = useState([false, false]);
 
-  const { mutate, isPending, isError, failureReason } = useLogin();
+  const { mutate, isPending, isError, failureReason, data } = useLogin();
+  const { authenticate } = useContext(AuthContext);
 
   function handleSubmit() {
     const validationErrors = validate(userName, passwd);
@@ -28,6 +30,12 @@ function LoginScreen({ navigation }: Props) {
 
     mutate({ username: userName, pwd: passwd });
   }
+
+  useEffect(() => {
+    if (data !== undefined) {
+      authenticate(data);
+    }
+  }, [data]);
 
   if (isPending) {
     return <LoadingOverlay />;
