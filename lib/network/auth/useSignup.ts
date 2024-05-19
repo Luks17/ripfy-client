@@ -1,19 +1,19 @@
-import { useMutation } from "@tanstack/react-query";
 import Config from "../config";
-import { ClientError } from "../error";
+import { useMutation } from "@tanstack/react-query";
 import { ApiResponse } from "../response";
+import { ClientError } from "../error";
 
 type Payload = {
   username: string;
   pwd: string;
 };
 
-export const useLogin = () => {
+export const useSignup = () => {
   return useMutation({
-    mutationFn: (user: Payload) =>
-      fetch(`${Config.apiEndpoint}/api/login`, {
+    mutationFn: (newUser: Payload) =>
+      fetch(`${Config.apiEndpoint}/api/signup`, {
         method: "POST",
-        body: JSON.stringify(user),
+        body: JSON.stringify(newUser),
         headers: {
           "Content-Type": "application/json",
         },

@@ -2,14 +2,14 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StyleSheet, Text, View } from "react-native";
 import { RootStackParamList } from "../lib/navigation/root";
 import PrimaryButton from "../components/buttons/PrimaryBtn";
-import { colors } from "../lib/ui/colors";
+import LoadingOverlay from "../components/feedback/LoadingOverlay";
+import ErrorCard from "../components/feedback/ErrorCard";
 import InputField from "../components/forms/InputField";
+import { colors } from "../lib/ui/colors";
 import { useState } from "react";
 import { validate } from "../lib/validation/login";
 import { hasError } from "../lib/validation/common";
 import { useLogin } from "../lib/network/auth/useLogin";
-import LoadingOverlay from "../components/feedback/LoadingOverlay";
-import ErrorCard from "../components/feedback/ErrorCard";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
@@ -24,9 +24,7 @@ function LoginScreen({ navigation }: Props) {
     const validationErrors = validate(userName, passwd);
     setErrors(validationErrors);
 
-    if (hasError(validationErrors)) {
-      return;
-    }
+    if (hasError(validationErrors)) return;
 
     mutate({ username: userName, pwd: passwd });
   }

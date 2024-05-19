@@ -5,10 +5,10 @@ interface Props {
   msg: string;
 }
 
-function ErrorCard({ msg }: Props) {
+function SuccessCard({ msg }: Props) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Erro</Text>
+      <Text style={styles.title}>Sucesso</Text>
       <Text style={styles.message}>{msg}</Text>
     </View>
   );
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 10,
     paddingHorizontal: 16,
-    backgroundColor: colors.error,
+    backgroundColor: colors.success,
     borderRadius: 4,
   },
   title: {
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
   message: {},
 });
 
-export default ErrorCard;
+export default SuccessCard;

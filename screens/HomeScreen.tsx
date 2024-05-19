@@ -3,12 +3,16 @@ import { StyleSheet, Text, View } from "react-native";
 import { RootStackParamList } from "../lib/navigation/root";
 import PrimaryButton from "../components/buttons/PrimaryBtn";
 import { colors } from "../lib/ui/colors";
+import SuccessCard from "../components/feedback/SucessCard";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
-function HomeScreen({ navigation }: Props) {
+function HomeScreen({ navigation, route }: Props) {
   return (
     <View style={styles.rootContainer}>
+      {route.params && route.params.signupSucess && (
+        <SuccessCard msg="Conta criada com sucesso!" />
+      )}
       <View style={styles.titleContainer}>
         <Text style={styles.mainTitle}>Ripfy</Text>
       </View>
