@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ReactNode, createContext, useState } from "react";
 
 interface ProviderProps {
@@ -13,7 +14,7 @@ type Value = {
 export const AuthContext = createContext<Value>({
   token: null,
   isLoggedIn: false,
-  authenticate: () => {},
+  authenticate: () => { },
 });
 
 export default function AuthContextProvider({ children }: ProviderProps) {
@@ -21,6 +22,8 @@ export default function AuthContextProvider({ children }: ProviderProps) {
 
   function authenticate(token: string | null) {
     setAuthToken(token);
+
+    if (token) AsyncStorage.setItem("auth-token", token);
   }
 
   const value: Value = {
