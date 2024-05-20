@@ -6,18 +6,18 @@ import {
   Text,
   View,
 } from "react-native";
-import { RootStackParamList } from "../lib/navigation/root";
+import { RootStackParamList } from "../../lib/navigation/root";
 import { useEffect, useState } from "react";
 
-import PrimaryButton from "../components/buttons/PrimaryBtn";
-import InputField from "../components/forms/InputField";
-import LoadingOverlay from "../components/feedback/LoadingOverlay";
-import ErrorCard from "../components/feedback/ErrorCard";
+import PrimaryButton from "../../components/buttons/PrimaryBtn";
+import InputField from "../../components/forms/InputField";
+import LoadingOverlay from "../../components/feedback/LoadingOverlay";
+import ErrorCard from "../../components/feedback/ErrorCard";
 
-import { colors } from "../lib/ui/colors";
-import { validate } from "../lib/validation/signup";
-import { hasError } from "../lib/validation/common";
-import { useSignup } from "../lib/network/auth/useSignup";
+import { colors } from "../../lib/ui/colors";
+import { validate } from "../../lib/validation/signup";
+import { hasError } from "../../lib/validation/common";
+import { useSignup } from "../../lib/network/auth/useSignup";
 
 type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
 

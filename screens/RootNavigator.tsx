@@ -1,8 +1,8 @@
 import { RootStack } from "../lib/navigation/root";
 import { colors } from "../lib/ui/colors";
-import HomeScreen from "./HomeScreen";
-import LoginScreen from "./LoginScreen";
-import SignupScreen from "./SignupScreen";
+import HomeScreen from "./Root//HomeScreen";
+import LoginScreen from "./Root/LoginScreen";
+import SignupScreen from "./Root/SignupScreen";
 
 function RootNavigator() {
   return (

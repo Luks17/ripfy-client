@@ -1,9 +1,9 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StyleSheet, Text, View } from "react-native";
-import { RootStackParamList } from "../lib/navigation/root";
-import PrimaryButton from "../components/buttons/PrimaryBtn";
-import { colors } from "../lib/ui/colors";
-import SuccessCard from "../components/feedback/SucessCard";
+import { RootStackParamList } from "../../lib/navigation/root";
+import PrimaryButton from "../../components/buttons/PrimaryBtn";
+import SuccessCard from "../../components/feedback/SucessCard";
+import { colors } from "../../lib/ui/colors";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
