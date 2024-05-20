@@ -44,7 +44,6 @@ function PrimaryButton({
 
 const styles = StyleSheet.create({
   outerContainer: {
-    borderRadius: 10,
     overflow: "hidden",
   },
   innerContainer: {

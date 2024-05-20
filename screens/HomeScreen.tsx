@@ -3,26 +3,30 @@ import { StyleSheet, Text, View } from "react-native";
 import { RootStackParamList } from "../lib/navigation/root";
 import PrimaryButton from "../components/buttons/PrimaryBtn";
 import { colors } from "../lib/ui/colors";
+import SuccessCard from "../components/feedback/SucessCard";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
-function HomeScreen({ navigation }: Props) {
+function HomeScreen({ navigation, route }: Props) {
   return (
     <View style={styles.rootContainer}>
+      {route.params && route.params.signupSucess && (
+        <SuccessCard msg="Conta criada com sucesso!" />
+      )}
       <View style={styles.titleContainer}>
         <Text style={styles.mainTitle}>Ripfy</Text>
       </View>
       <View style={styles.buttonsContainer}>
         <PrimaryButton
-          outerStyle={{ width: "50%" }}
-          innerStyle={styles.button}
+          outerStyle={[{ width: "50%" }, styles.rounded]}
+          innerStyle={[styles.button, styles.rounded]}
           onPress={() => navigation.navigate("SignUp")}
         >
           Criar Conta
         </PrimaryButton>
         <PrimaryButton
-          outerStyle={{ width: "50%" }}
-          innerStyle={styles.button}
+          outerStyle={[{ width: "50%" }, styles.rounded]}
+          innerStyle={[styles.button, styles.rounded]}
           onPress={() => navigation.navigate("Login")}
         >
           Entrar
@@ -48,15 +52,17 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     width: "100%",
-    flexDirection: "row",
-    columnGap: 10,
+    rowGap: 10,
     padding: 20,
     justifyContent: "center",
+    alignItems: "center",
   },
   button: {
     paddingVertical: 15,
     backgroundColor: colors.secondary,
-    borderRadius: 20,
+  },
+  rounded: {
+    borderRadius: 5,
   },
 });
 

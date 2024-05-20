@@ -2,7 +2,7 @@ import { FontAwesome6, MaterialCommunityIcons } from "@expo/vector-icons";
 import { AppTabs } from "../lib/navigation/appTabs";
 import CatalogScreen from "./App/CatalogScreen";
 
-function AppScreen() {
+function AppNavigator() {
   return (
     <AppTabs.Navigator>
       <AppTabs.Screen
@@ -33,4 +33,4 @@ function AppScreen() {
   );
 }
 
-export default AppScreen;
+export default AppNavigator;
