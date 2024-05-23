@@ -19,4 +19,5 @@ export const colors = {
   warningContent: "#F8F8F2",
   error: "#FF5555",
   errorContent: "#F8F8F2",
+  text: "#1F202A",
 };
