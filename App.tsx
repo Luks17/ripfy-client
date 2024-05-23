@@ -4,9 +4,9 @@ import AppNavigator from "./screens/AppNavigator";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useContext, useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SplashScreen from "expo-splash-screen";
 import RootNavigator from "./screens/RootNavigator";
+import { tryRefreshSession } from "./lib/network/session";
 
 const queryClient = new QueryClient();
 
@@ -21,18 +21,12 @@ function Navigation() {
 
 export function AppSetup() {
   const [isAppReady, setIsAppReady] = useState(false);
-  const { authenticate } = useContext(AuthContext);
-
-  async function fetchToken() {
-    const token = await AsyncStorage.getItem("auth-token");
-
-    authenticate(token);
-  }
+  const { authenticate, clearSession } = useContext(AuthContext);
 
   useEffect(() => {
-    fetchToken()
-      .then(() => setIsAppReady(true))
-      .catch((e) => console.log(e));
+    tryRefreshSession(authenticate, clearSession).then(() =>
+      setIsAppReady(true)
+    );
   }, []);
 
   useEffect(() => {

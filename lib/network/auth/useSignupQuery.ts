@@ -8,7 +8,7 @@ type Payload = {
   pwd: string;
 };
 
-export const useSignup = () => {
+export const useSignupQuery = () => {
   return useMutation({
     mutationFn: (newUser: Payload) =>
       fetch(`${Config.apiEndpoint}/api/signup`, {

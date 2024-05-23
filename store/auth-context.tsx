@@ -1,35 +1,42 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ReactNode, createContext, useState } from "react";
+import { AuthExpectedData } from "../lib/network/response";
+import { REFRESH_TOKEN } from "../lib/constants/tokens";
 
 interface ProviderProps {
   children: ReactNode;
 }
 
+export type AuthenticateFunction = (authData: AuthExpectedData) => void;
+export type ClearSessionFunction = () => void;
+
 type Value = {
   token: string | null;
   isLoggedIn: boolean;
-  authenticate: (token: string | null) => void;
+  authenticate: AuthenticateFunction;
+  clearSession: ClearSessionFunction;
 };
 
-export const AuthContext = createContext<Value>({
-  token: null,
-  isLoggedIn: false,
-  authenticate: () => { },
-});
+export const AuthContext = createContext<Value>({} as Value);
 
 export default function AuthContextProvider({ children }: ProviderProps) {
   const [authToken, setAuthToken] = useState<null | string>(null);
 
-  function authenticate(token: string | null) {
-    setAuthToken(token);
+  function authenticate(authData: AuthExpectedData) {
+    setAuthToken(authData.access_token);
+    AsyncStorage.setItem(REFRESH_TOKEN, authData.refresh_token);
+  }
 
-    if (token) AsyncStorage.setItem("auth-token", token);
+  function clearSession() {
+    setAuthToken(null);
+    AsyncStorage.removeItem(REFRESH_TOKEN);
   }
 
   const value: Value = {
     token: authToken,
     isLoggedIn: !!authToken,
     authenticate,
+    clearSession,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -3,3 +3,8 @@ export type ApiResponse<T> = {
   data?: T;
   error?: string;
 };
+
+export type AuthExpectedData = {
+  access_token: string;
+  refresh_token: string;
+};

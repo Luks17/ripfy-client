@@ -17,7 +17,7 @@ import ErrorCard from "../../components/feedback/ErrorCard";
 import { colors } from "../../lib/ui/colors";
 import { validate } from "../../lib/validation/signup";
 import { hasError } from "../../lib/validation/common";
-import { useSignup } from "../../lib/network/auth/useSignup";
+import { useSignupQuery } from "../../lib/network/auth/useSignupQuery";
 
 type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
 
@@ -27,7 +27,8 @@ function SignupScreen({ navigation }: Props) {
   const [confPasswd, setConfPasswd] = useState("");
   const [errors, setErrors] = useState([false, false, false]);
 
-  const { mutate, isPending, isError, isSuccess, failureReason } = useSignup();
+  const { mutate, isPending, isError, isSuccess, failureReason } =
+    useSignupQuery();
 
   function handleSubmit() {
     const validationErrors = validate(userName, passwd, confPasswd);
