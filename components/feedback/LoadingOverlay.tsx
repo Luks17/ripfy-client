@@ -1,5 +1,5 @@
 import { ActivityIndicator, StyleSheet, View } from "react-native";
-import { colors } from "../../lib/ui/colors";
+import { colors } from "../../lib/constants/colors";
 
 function LoadingOverlay() {
   return (

@@ -6,8 +6,8 @@ import {
   TextStyle,
   View,
 } from "react-native";
-import { colors } from "../../lib/ui/colors";
 import { addOpacity } from "../../lib/ui/utils";
+import { colors } from "../../lib/constants/colors";
 
 interface Props {
   label: string;

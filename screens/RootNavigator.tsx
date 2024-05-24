@@ -1,5 +1,5 @@
+import { colors } from "../lib/constants/colors";
 import { RootStack } from "../lib/navigation/root";
-import { colors } from "../lib/ui/colors";
 import HomeScreen from "./Root//HomeScreen";
 import LoginScreen from "./Root/LoginScreen";
 import SignupScreen from "./Root/SignupScreen";

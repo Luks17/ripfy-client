@@ -14,10 +14,10 @@ import InputField from "../../components/forms/InputField";
 import LoadingOverlay from "../../components/feedback/LoadingOverlay";
 import ErrorCard from "../../components/feedback/ErrorCard";
 
-import { colors } from "../../lib/ui/colors";
 import { validate } from "../../lib/validation/signup";
 import { hasError } from "../../lib/validation/common";
 import { useSignupQuery } from "../../lib/network/auth/useSignupQuery";
+import { colors } from "../../lib/constants/colors";
 
 type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
 

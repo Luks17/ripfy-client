@@ -8,7 +8,7 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import { colors } from "../../lib/ui/colors";
+import { colors } from "../../lib/constants/colors";
 
 interface Props {
   children?: React.ReactNode;

@@ -1,7 +1,7 @@
 import Config from "../config";
 import { useMutation } from "@tanstack/react-query";
-import { ApiResponse } from "../response";
 import { ClientError } from "../error";
+import { ApiResponse } from "../../constants/response";
 
 type Payload = {
   username: string;

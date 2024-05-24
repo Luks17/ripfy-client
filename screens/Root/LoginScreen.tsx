@@ -7,11 +7,11 @@ import PrimaryButton from "../../components/buttons/PrimaryBtn";
 import LoadingOverlay from "../../components/feedback/LoadingOverlay";
 import ErrorCard from "../../components/feedback/ErrorCard";
 import InputField from "../../components/forms/InputField";
-import { colors } from "../../lib/ui/colors";
 import { validate } from "../../lib/validation/login";
 import { hasError } from "../../lib/validation/common";
 import { useLoginQuery } from "../../lib/network/auth/useLoginQuery";
 import { AuthContext } from "../../store/auth-context";
+import { colors } from "../../lib/constants/colors";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 

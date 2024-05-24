@@ -1,11 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Config from "./config";
-import { ApiResponse, AuthExpectedData } from "./response";
 import { REFRESH_TOKEN } from "../constants/tokens";
 import {
   AuthenticateFunction,
   ClearSessionFunction,
 } from "../../store/auth-context";
+import { ApiResponse } from "../constants/response";
+import { AuthExpectedData } from "../constants/responses/auth";
 
 export async function tryRefreshSession(
   authenticate: AuthenticateFunction,

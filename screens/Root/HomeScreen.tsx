@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { RootStackParamList } from "../../lib/navigation/root";
 import PrimaryButton from "../../components/buttons/PrimaryBtn";
 import SuccessCard from "../../components/feedback/SucessCard";
-import { colors } from "../../lib/ui/colors";
+import { colors } from "../../lib/constants/colors";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
