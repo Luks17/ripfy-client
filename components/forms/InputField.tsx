@@ -5,14 +5,16 @@ import {
   TextInput,
   TextStyle,
   View,
+  ViewStyle,
 } from "react-native";
 import { addOpacity } from "../../lib/ui/utils";
 import { colors } from "../../lib/constants/colors";
 
 interface Props {
-  label: string;
+  label?: string;
   value: string;
   onInputChange: (text: string) => void;
+  containerStyle?: StyleProp<ViewStyle>;
   placeholder?: string;
   secure?: boolean;
   error?: boolean;
@@ -22,6 +24,7 @@ function InputField({
   label,
   value,
   onInputChange,
+  containerStyle,
   placeholder = label,
   secure = false,
   error = false,
@@ -32,8 +35,8 @@ function InputField({
   if (error) textInputStyles.push(styles.borderInputError);
 
   return (
-    <View>
-      <Text style={styles.label}>{label}</Text>
+    <View style={containerStyle}>
+      {label !== undefined && <Text style={styles.label}>{label}</Text>}
       <TextInput
         style={textInputStyles}
         placeholder={placeholder}
