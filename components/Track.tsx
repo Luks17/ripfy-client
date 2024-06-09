@@ -1,12 +1,13 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Song } from "../lib/constants/responses/song";
 
-function Track() {
+function Track({ song }: { song: Song }) {
   return (
     <View style={styles.buttonStack}>
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.nomeMusica}>Nome Musica</Text>
+        <Text style={styles.nomeMusica}>{song.title}</Text>
         <View style={styles.nomeArtistaRow}>
-          <Text style={styles.nomeArtista}>Nome Artista</Text>
+          <Text style={styles.nomeArtista}>{song.channel}</Text>
           <Text style={styles.tempo}>00:00</Text>
         </View>
       </TouchableOpacity>
