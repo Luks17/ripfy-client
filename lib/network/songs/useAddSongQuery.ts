@@ -1,9 +1,10 @@
 import Config from "../config";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ClientError } from "../error";
 import { ApiResponse } from "../../constants/response";
 import { useContext } from "react";
 import { AuthContext } from "../../../store/auth-context";
+import { Song } from "../../constants/responses/song";
 
 type Payload = {
   link: string;
@@ -11,6 +12,7 @@ type Payload = {
 
 export const useAddSongQuery = () => {
   const { token } = useContext(AuthContext);
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (payload: Payload) =>
@@ -22,9 +24,16 @@ export const useAddSongQuery = () => {
           "Content-Type": "application/json",
         },
       }).then(async (res) => {
-        const resBody: ApiResponse<void> = await res.json();
+        const resBody: ApiResponse<Song> = await res.json();
 
         if (!resBody.success) throw new ClientError(resBody.error!);
+
+        return resBody.data!;
       }),
+    onSuccess: (song) => {
+      queryClient.setQueryData<Song[]>(["songs"], (old) =>
+        old !== undefined ? [...old, song] : [song]
+      );
+    },
   });
 };
