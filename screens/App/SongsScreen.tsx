@@ -1,16 +1,14 @@
 import { StyleSheet, TextInput, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors } from "../../lib/constants/colors";
-import Track from "../../components/Track";
+import Track from "../../components/core/Track";
 import { useGetSongsQuery } from "../../lib/network/songs/useGetSongsQuery";
-import { useContext } from "react";
-import { AuthContext } from "../../store/auth-context";
+import LoadingView from "../../components/feedback/LoadingView";
 
 function SongsScreen() {
-  const { token } = useContext(AuthContext);
-  const { data, isPending } = useGetSongsQuery(token!);
+  const { data, isPending } = useGetSongsQuery();
 
-  if (isPending) return null;
+  if (isPending) return <LoadingView />;
 
   return (
     <View style={styles.container}>
@@ -23,7 +21,7 @@ function SongsScreen() {
           <FontAwesome name="search" size={24} color="black" />
         </View>
       </View>
-      {data?.map((song) => <Track song={song}></Track>)}
+      {data?.map((song) => <Track key={song.id} song={song}></Track>)}
     </View>
   );
 }

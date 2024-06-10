@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Song } from "../lib/constants/responses/song";
+import { Song } from "../../lib/constants/responses/song";
 
 function Track({ song }: { song: Song }) {
   return (
@@ -12,7 +12,7 @@ function Track({ song }: { song: Song }) {
         </View>
       </TouchableOpacity>
       <Image
-        source={require("../assets/unknown_artist.png")}
+        source={require("../../assets/unknown_artist.png")}
         resizeMode="contain"
         style={styles.image}
       ></Image>

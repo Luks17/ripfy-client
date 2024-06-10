@@ -15,6 +15,7 @@ interface Props {
   value: string;
   onInputChange: (text: string) => void;
   containerStyle?: StyleProp<ViewStyle>;
+  inputFieldColor?: string;
   placeholder?: string;
   secure?: boolean;
   error?: boolean;
@@ -25,14 +26,15 @@ function InputField({
   value,
   onInputChange,
   containerStyle,
+  inputFieldColor = colors.tertiary,
   placeholder = label,
   secure = false,
   error = false,
 }: Props) {
   let textInputStyles: StyleProp<TextStyle> = [styles.textInput];
 
-  if (value) textInputStyles.push(styles.borderInputTertiary);
-  if (error) textInputStyles.push(styles.borderInputError);
+  if (value) textInputStyles.push({ borderBottomColor: inputFieldColor });
+  if (error) textInputStyles.push({ borderBottomColor: colors.error });
 
   return (
     <View style={containerStyle}>
@@ -58,12 +60,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     padding: 6,
     borderBottomColor: addOpacity(colors.baseContent),
-  },
-  borderInputTertiary: {
-    borderBottomColor: colors.tertiary,
-  },
-  borderInputError: {
-    borderBottomColor: colors.error,
   },
 });
 

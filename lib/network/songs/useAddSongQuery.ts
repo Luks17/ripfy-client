@@ -1,29 +1,30 @@
-import { ApiResponse } from "../../constants/response";
-import { Song } from "../../constants/responses/song";
 import Config from "../config";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { ClientError } from "../error";
+import { ApiResponse } from "../../constants/response";
 import { useContext } from "react";
 import { AuthContext } from "../../../store/auth-context";
 
-export const useGetSongsQuery = () => {
+type Payload = {
+  link: string;
+};
+
+export const useAddSongQuery = () => {
   const { token } = useContext(AuthContext);
 
-  return useQuery({
-    queryKey: ["songs"],
-    queryFn: () =>
+  return useMutation({
+    mutationFn: (payload: Payload) =>
       fetch(`${Config.apiEndpoint}/api/songs`, {
-        method: "GET",
+        method: "POST",
+        body: JSON.stringify(payload),
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
       }).then(async (res) => {
-        const resBody: ApiResponse<Song[]> = await res.json();
+        const resBody: ApiResponse<void> = await res.json();
 
         if (!resBody.success) throw new ClientError(resBody.error!);
-
-        return resBody.data!;
       }),
   });
 };

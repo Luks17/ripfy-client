@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 import PrimaryButton from "../../components/buttons/PrimaryBtn";
 import InputField from "../../components/forms/InputField";
-import LoadingOverlay from "../../components/feedback/LoadingOverlay";
+import LoadingView from "../../components/feedback/LoadingView";
 import ErrorCard from "../../components/feedback/ErrorCard";
 
 import { validate } from "../../lib/validation/signup";
@@ -46,7 +46,7 @@ function SignupScreen({ navigation }: Props) {
   }, [isSuccess]);
 
   if (isPending) {
-    return <LoadingOverlay />;
+    return <LoadingView />;
   }
 
   return (

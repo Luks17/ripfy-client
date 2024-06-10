@@ -1,19 +1,26 @@
 import { StyleSheet, Text, View } from "react-native";
-import IconBtn from "./buttons/IconBtn";
+import IconBtn from "../buttons/IconBtn";
 import { useState } from "react";
-import { colors } from "../lib/constants/colors";
-import InputField from "./forms/InputField";
-import PrimaryButton from "./buttons/PrimaryBtn";
-import SlideUpModal from "./modals/SlideUpModal";
+import { colors } from "../../lib/constants/colors";
+import InputField from "../forms/InputField";
+import PrimaryButton from "../buttons/PrimaryBtn";
+import SlideUpModal from "../modals/SlideUpModal";
+import { useAddSongQuery } from "../../lib/network/songs/useAddSongQuery";
 
 function AddSong() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [songUrl, setSongUrl] = useState("");
 
+  const { mutate, data, isError, failureReason, isPending } = useAddSongQuery();
+
   const showModal = () => setIsModalVisible(true);
   const hideModal = () => setIsModalVisible(false);
 
   const handleInputChange = (text: string) => setSongUrl(text);
+
+  function handleSubmit() {
+    mutate({ link: songUrl });
+  }
 
   return (
     <>
@@ -28,10 +35,12 @@ function AddSong() {
             value={songUrl}
             onInputChange={handleInputChange}
             placeholder="URL do YouTube"
+            inputFieldColor={colors.baseContent}
           />
           <PrimaryButton
             outerStyle={styles.outerBtn}
             innerStyle={styles.innerBtn}
+            onPress={handleSubmit}
           >
             Adicionar
           </PrimaryButton>

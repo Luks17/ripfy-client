@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { RootStackParamList } from "../../lib/navigation/root";
 import PrimaryButton from "../../components/buttons/PrimaryBtn";
-import LoadingOverlay from "../../components/feedback/LoadingOverlay";
+import LoadingView from "../../components/feedback/LoadingView";
 import ErrorCard from "../../components/feedback/ErrorCard";
 import InputField from "../../components/forms/InputField";
 import { validate } from "../../lib/validation/login";
@@ -39,7 +39,7 @@ function LoginScreen({ navigation }: Props) {
   }, [data]);
 
   if (isPending) {
-    return <LoadingOverlay />;
+    return <LoadingView />;
   }
 
   return (

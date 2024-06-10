@@ -2,7 +2,7 @@ import { FontAwesome6, MaterialCommunityIcons } from "@expo/vector-icons";
 import { AppTabs } from "../lib/navigation/appTabs";
 import SongsScreen from "../screens/App/SongsScreen";
 import PlaylistScreen from "./App/PlaylistScreen";
-import AddSong from "../components/AddSong";
+import AddSong from "../components/core/AddSong";
 
 function AppNavigator() {
   return (
