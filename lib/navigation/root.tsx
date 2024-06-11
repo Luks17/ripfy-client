@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export type RootStackParamList = {
-  Home?: { signupSucess: boolean };
+  Home: undefined;
   Login: undefined;
   SignUp: undefined;
 };

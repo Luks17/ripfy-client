@@ -7,7 +7,7 @@ import {
   View,
 } from "react-native";
 import { RootStackParamList } from "../../lib/navigation/root";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import PrimaryButton from "../../components/buttons/PrimaryBtn";
 import InputField from "../../components/forms/InputField";
@@ -18,6 +18,7 @@ import { validate } from "../../lib/validation/signup";
 import { hasError } from "../../lib/validation/common";
 import { useSignupQuery } from "../../lib/network/auth/useSignupQuery";
 import { colors } from "../../lib/constants/colors";
+import { ToastContext } from "../../store/toast-context";
 
 type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
 
@@ -26,6 +27,8 @@ function SignupScreen({ navigation }: Props) {
   const [passwd, setPasswd] = useState("");
   const [confPasswd, setConfPasswd] = useState("");
   const [errors, setErrors] = useState([false, false, false]);
+
+  const { displayToast } = useContext(ToastContext);
 
   const { mutate, isPending, isError, isSuccess, failureReason } =
     useSignupQuery();
@@ -41,7 +44,8 @@ function SignupScreen({ navigation }: Props) {
 
   useEffect(() => {
     if (isSuccess) {
-      navigation.navigate("Home", { signupSucess: true });
+      displayToast("success", "Conta criada com sucesso");
+      navigation.navigate("Home");
     }
   }, [isSuccess]);
 

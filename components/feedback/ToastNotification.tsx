@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text } from "react-native";
-import Animated, { FadeInDown, FadeOutDown } from "react-native-reanimated";
+import Animated, { FadeInUp, FadeOutUp } from "react-native-reanimated";
 import { colors } from "../../lib/constants/colors";
 import { ToastTypes } from "../../store/toast-context";
 import { useEffect } from "react";
@@ -21,8 +21,8 @@ function ToastNotification({ type, message, closeToast }: Props) {
 
   return (
     <Animated.View
-      entering={FadeInDown}
-      exiting={FadeOutDown}
+      entering={FadeInUp}
+      exiting={FadeOutUp}
       style={[styles.modalContainer, { borderColor: colors[type] }]}
     >
       <Pressable onPress={closeToast}>
