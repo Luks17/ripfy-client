@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   useAll: { flex: 1 },
   modalContainer: {
     position: "absolute",
+    zIndex: 99,
     height: "35%",
     width: "100%",
     bottom: 0,
