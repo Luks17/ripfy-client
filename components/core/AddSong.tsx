@@ -1,36 +1,19 @@
 import { StyleSheet, Text, View } from "react-native";
 import IconBtn from "../buttons/IconBtn";
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { colors } from "../../lib/constants/colors";
 import InputField from "../forms/InputField";
 import PrimaryButton from "../buttons/PrimaryBtn";
 import SlideUpModal from "../modals/SlideUpModal";
 import { useAddSongQuery } from "../../lib/network/songs/useAddSongQuery";
-import { ToastContext } from "../../store/toast-context";
-import { LoadingOverlayContext } from "../../store/loading-overlay-context";
+import { useResponsiveMutation } from "../../lib/hooks/useResponsiveMutation";
 
 function AddSong() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [songUrl, setSongUrl] = useState("");
 
-  const { displayToast } = useContext(ToastContext);
-  const { showLoadingOverlay, hideLoadingOverlay } = useContext(
-    LoadingOverlayContext
-  );
-
-  const { mutate, isError, failureReason, isPending, isSuccess } =
-    useAddSongQuery();
-
-  useEffect(() => {
-    if (isPending) {
-      showLoadingOverlay();
-    } else {
-      hideLoadingOverlay();
-      if (isSuccess) displayToast("success", "Música adicionada com sucesso");
-      else if (isError && failureReason)
-        displayToast("error", failureReason.message);
-    }
-  }, [isSuccess, isError, isPending]);
+  const addSongMutation = useAddSongQuery();
+  useResponsiveMutation(addSongMutation, "Música adicionada com sucesso");
 
   const showModal = () => setIsModalVisible(true);
   const hideModal = () => setIsModalVisible(false);
@@ -38,7 +21,7 @@ function AddSong() {
   const handleInputChange = (text: string) => setSongUrl(text);
 
   function handleSubmit() {
-    mutate({ link: songUrl });
+    addSongMutation.mutate({ link: songUrl });
   }
 
   return (
