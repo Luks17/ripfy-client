@@ -7,21 +7,30 @@ import PrimaryButton from "../buttons/PrimaryBtn";
 import SlideUpModal from "../modals/SlideUpModal";
 import { useAddSongQuery } from "../../lib/network/songs/useAddSongQuery";
 import { ToastContext } from "../../store/toast-context";
+import { LoadingOverlayContext } from "../../store/loading-overlay-context";
 
 function AddSong() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [songUrl, setSongUrl] = useState("");
 
   const { displayToast } = useContext(ToastContext);
+  const { showLoadingOverlay, hideLoadingOverlay } = useContext(
+    LoadingOverlayContext
+  );
 
   const { mutate, isError, failureReason, isPending, isSuccess } =
     useAddSongQuery();
 
   useEffect(() => {
-    if (isSuccess) displayToast("success", "Música adicionada com sucesso");
-    else if (isError && failureReason)
-      displayToast("error", failureReason.message);
-  }, [isSuccess, isError]);
+    if (isPending) {
+      showLoadingOverlay();
+    } else {
+      hideLoadingOverlay();
+      if (isSuccess) displayToast("success", "Música adicionada com sucesso");
+      else if (isError && failureReason)
+        displayToast("error", failureReason.message);
+    }
+  }, [isSuccess, isError, isPending]);
 
   const showModal = () => setIsModalVisible(true);
   const hideModal = () => setIsModalVisible(false);
