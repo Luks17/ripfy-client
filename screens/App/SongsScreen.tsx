@@ -3,12 +3,12 @@ import { FontAwesome } from "@expo/vector-icons";
 import { colors } from "../../lib/constants/colors";
 import Track from "../../components/core/Track";
 import { useGetSongsQuery } from "../../lib/network/songs/useGetSongsQuery";
-import LoadingView from "../../components/feedback/LoadingView";
+import LoadingIndicator from "../../components/feedback/LoadingIndicator";
 
 function SongsScreen() {
   const { data, isPending } = useGetSongsQuery();
 
-  if (isPending) return <LoadingView />;
+  if (isPending) return <LoadingIndicator />;
 
   return (
     <View style={styles.container}>

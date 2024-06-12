@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
     padding: 24,
-    backgroundColor: addOpacity(colors.base100),
+    backgroundColor: addOpacity(colors.base300),
   },
 });
 

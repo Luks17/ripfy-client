@@ -4,14 +4,13 @@ import { useContext, useEffect, useState } from "react";
 
 import { RootStackParamList } from "../../lib/navigation/root";
 import PrimaryButton from "../../components/buttons/PrimaryBtn";
-import LoadingView from "../../components/feedback/LoadingView";
-import ErrorCard from "../../components/feedback/ErrorCard";
 import InputField from "../../components/forms/InputField";
 import { validate } from "../../lib/validation/login";
 import { hasError } from "../../lib/validation/common";
 import { useLoginQuery } from "../../lib/network/auth/useLoginQuery";
 import { AuthContext } from "../../store/auth-context";
 import { colors } from "../../lib/constants/colors";
+import { useResponsiveMutation } from "../../lib/hooks/useResponsiveMutation";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
@@ -20,8 +19,12 @@ function LoginScreen({ navigation }: Props) {
   const [passwd, setPasswd] = useState("");
   const [errors, setErrors] = useState([false, false]);
 
-  const { mutate, isPending, isError, failureReason, data } = useLoginQuery();
+  const loginMutation = useLoginQuery();
+  const { mutate, data } = loginMutation;
+
   const { authenticate } = useContext(AuthContext);
+
+  useResponsiveMutation(loginMutation, "Login realizado com sucesso!");
 
   function handleSubmit() {
     const validationErrors = validate(userName, passwd);
@@ -38,10 +41,6 @@ function LoginScreen({ navigation }: Props) {
     }
   }, [data]);
 
-  if (isPending) {
-    return <LoadingView />;
-  }
-
   return (
     <View style={styles.rootContainer}>
       <View style={styles.titleContainer}>
@@ -49,7 +48,6 @@ function LoginScreen({ navigation }: Props) {
         <Text style={styles.subtitle}>Faça login para continuar</Text>
       </View>
       <View style={styles.formContainer}>
-        {isError && <ErrorCard msg={failureReason!.message} />}
         <InputField
           value={userName}
           onInputChange={(text) => setUserName(text)}

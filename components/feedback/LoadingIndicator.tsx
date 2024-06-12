@@ -1,11 +1,17 @@
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { colors } from "../../lib/constants/colors";
 
-function LoadingView() {
-  return (
+interface Props {
+  occupyAll?: boolean;
+}
+
+function LoadingIndicator({ occupyAll = true }: Props) {
+  return occupyAll ? (
     <View style={styles.container}>
       <ActivityIndicator size="large" color={colors.primary} />
     </View>
+  ) : (
+    <ActivityIndicator size="large" color={colors.primary} />
   );
 }
 
@@ -19,4 +25,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoadingView;
+export default LoadingIndicator;

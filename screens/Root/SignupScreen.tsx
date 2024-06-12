@@ -7,18 +7,16 @@ import {
   View,
 } from "react-native";
 import { RootStackParamList } from "../../lib/navigation/root";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import PrimaryButton from "../../components/buttons/PrimaryBtn";
 import InputField from "../../components/forms/InputField";
-import LoadingView from "../../components/feedback/LoadingView";
-import ErrorCard from "../../components/feedback/ErrorCard";
 
 import { validate } from "../../lib/validation/signup";
 import { hasError } from "../../lib/validation/common";
 import { useSignupQuery } from "../../lib/network/auth/useSignupQuery";
 import { colors } from "../../lib/constants/colors";
-import { ToastContext } from "../../store/toast-context";
+import { useResponsiveMutation } from "../../lib/hooks/useResponsiveMutation";
 
 type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
 
@@ -28,10 +26,10 @@ function SignupScreen({ navigation }: Props) {
   const [confPasswd, setConfPasswd] = useState("");
   const [errors, setErrors] = useState([false, false, false]);
 
-  const { displayToast } = useContext(ToastContext);
+  const signupMutation = useSignupQuery();
+  const { mutate, isSuccess } = signupMutation;
 
-  const { mutate, isPending, isError, isSuccess, failureReason } =
-    useSignupQuery();
+  useResponsiveMutation(signupMutation, "Conta criada com sucesso!");
 
   function handleSubmit() {
     const validationErrors = validate(userName, passwd, confPasswd);
@@ -44,14 +42,9 @@ function SignupScreen({ navigation }: Props) {
 
   useEffect(() => {
     if (isSuccess) {
-      displayToast("success", "Conta criada com sucesso");
       navigation.navigate("Home");
     }
   }, [isSuccess]);
-
-  if (isPending) {
-    return <LoadingView />;
-  }
 
   return (
     <ScrollView style={styles.rootContainer}>
@@ -61,7 +54,6 @@ function SignupScreen({ navigation }: Props) {
           <Text style={styles.subtitle}>Crie uma conta para continuar</Text>
         </View>
         <View style={styles.formContainer}>
-          {isError && <ErrorCard msg={failureReason!.message} />}
           <InputField
             value={userName}
             onInputChange={(text) => setUserName(text)}

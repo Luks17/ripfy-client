@@ -6,14 +6,17 @@ import InputField from "../forms/InputField";
 import PrimaryButton from "../buttons/PrimaryBtn";
 import SlideUpModal from "../modals/SlideUpModal";
 import { useAddSongQuery } from "../../lib/network/songs/useAddSongQuery";
-import { useResponsiveMutation } from "../../lib/hooks/useResponsiveMutation";
+import LoadingIndicator from "../feedback/LoadingIndicator";
+import { useMutationToasts } from "../../lib/hooks/useMutationToasts";
 
 function AddSong() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [songUrl, setSongUrl] = useState("");
 
   const addSongMutation = useAddSongQuery();
-  useResponsiveMutation(addSongMutation, "Música adicionada com sucesso");
+  const { mutate, isPending } = addSongMutation;
+
+  useMutationToasts(addSongMutation, "Música adicionada com sucesso!");
 
   const showModal = () => setIsModalVisible(true);
   const hideModal = () => setIsModalVisible(false);
@@ -21,7 +24,7 @@ function AddSong() {
   const handleInputChange = (text: string) => setSongUrl(text);
 
   function handleSubmit() {
-    addSongMutation.mutate({ link: songUrl });
+    mutate({ link: songUrl });
   }
 
   return (
@@ -39,13 +42,17 @@ function AddSong() {
             placeholder="URL do YouTube"
             inputFieldColor={colors.baseContent}
           />
-          <PrimaryButton
-            outerStyle={styles.outerBtn}
-            innerStyle={styles.innerBtn}
-            onPress={handleSubmit}
-          >
-            Adicionar
-          </PrimaryButton>
+          {!isPending ? (
+            <PrimaryButton
+              outerStyle={styles.outerBtn}
+              innerStyle={styles.innerBtn}
+              onPress={handleSubmit}
+            >
+              Adicionar
+            </PrimaryButton>
+          ) : (
+            <LoadingIndicator occupyAll={false} />
+          )}
         </View>
       </SlideUpModal>
     </>
