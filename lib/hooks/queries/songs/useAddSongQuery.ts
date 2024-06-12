@@ -1,10 +1,10 @@
-import Config from "../config";
+import Config from "../../../network/config";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { ClientError } from "../error";
-import { ApiResponse } from "../../constants/response";
+import { ClientError } from "../../../network/error";
+import { ApiResponse } from "../../../constants/response";
 import { useContext } from "react";
-import { AuthContext } from "../../../store/auth-context";
-import { Song } from "../../constants/responses/song";
+import { AuthContext } from "../../../../store/auth-context";
+import { Song } from "../../../constants/responses/song";
 
 type Payload = {
   link: string;

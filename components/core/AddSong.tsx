@@ -5,7 +5,7 @@ import { colors } from "../../lib/constants/colors";
 import InputField from "../forms/InputField";
 import PrimaryButton from "../buttons/PrimaryBtn";
 import SlideUpModal from "../modals/SlideUpModal";
-import { useAddSongQuery } from "../../lib/network/songs/useAddSongQuery";
+import { useAddSongQuery } from "../../lib/hooks/queries/songs/useAddSongQuery";
 import LoadingIndicator from "../feedback/LoadingIndicator";
 import { useMutationToasts } from "../../lib/hooks/mutations/useMutationToasts";
 

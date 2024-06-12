@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import Config from "../config";
-import { ClientError } from "../error";
-import { ApiResponse } from "../../constants/response";
-import { AuthExpectedData } from "../../constants/responses/auth";
+import Config from "../../../network/config";
+import { ClientError } from "../../../network/error";
+import { ApiResponse } from "../../../constants/response";
+import { AuthExpectedData } from "../../../constants/responses/auth";
 
 type Payload = {
   username: string;

@@ -14,7 +14,7 @@ import InputField from "../../components/forms/InputField";
 
 import { validate } from "../../lib/validation/signup";
 import { hasError } from "../../lib/validation/common";
-import { useSignupQuery } from "../../lib/network/auth/useSignupQuery";
+import { useSignupQuery } from "../../lib/hooks/queries/auth/useSignupQuery";
 import { colors } from "../../lib/constants/colors";
 import { useResponsiveMutation } from "../../lib/hooks/mutations/useResponsiveMutation";
 

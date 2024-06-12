@@ -7,7 +7,7 @@ import PrimaryButton from "../../components/buttons/PrimaryBtn";
 import InputField from "../../components/forms/InputField";
 import { validate } from "../../lib/validation/login";
 import { hasError } from "../../lib/validation/common";
-import { useLoginQuery } from "../../lib/network/auth/useLoginQuery";
+import { useLoginQuery } from "../../lib/hooks/queries/auth/useLoginQuery";
 import { AuthContext } from "../../store/auth-context";
 import { colors } from "../../lib/constants/colors";
 import { useResponsiveMutation } from "../../lib/hooks/mutations/useResponsiveMutation";

@@ -2,7 +2,7 @@ import { StyleSheet, TextInput, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors } from "../../lib/constants/colors";
 import Track from "../../components/core/Track";
-import { useGetSongsQuery } from "../../lib/network/songs/useGetSongsQuery";
+import { useGetSongsQuery } from "../../lib/hooks/queries/songs/useGetSongsQuery";
 import LoadingIndicator from "../../components/feedback/LoadingIndicator";
 
 function SongsScreen() {
