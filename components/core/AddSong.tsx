@@ -7,7 +7,7 @@ import PrimaryButton from "../buttons/PrimaryBtn";
 import SlideUpModal from "../modals/SlideUpModal";
 import { useAddSongQuery } from "../../lib/network/songs/useAddSongQuery";
 import LoadingIndicator from "../feedback/LoadingIndicator";
-import { useMutationToasts } from "../../lib/hooks/useMutationToasts";
+import { useMutationToasts } from "../../lib/hooks/mutations/useMutationToasts";
 
 function AddSong() {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -16,12 +16,14 @@ function AddSong() {
   const addSongMutation = useAddSongQuery();
   const { mutate, isPending } = addSongMutation;
 
-  useMutationToasts(addSongMutation, "Música adicionada com sucesso!");
-
   const showModal = () => setIsModalVisible(true);
   const hideModal = () => setIsModalVisible(false);
 
   const handleInputChange = (text: string) => setSongUrl(text);
+
+  useMutationToasts(addSongMutation, "Música adicionada com sucesso!", () => {
+    hideModal();
+  });
 
   function handleSubmit() {
     mutate({ link: songUrl });

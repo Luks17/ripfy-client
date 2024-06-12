@@ -1,11 +1,12 @@
 import { useContext, useEffect } from "react";
-import { ToastContext } from "../../store/toast-context";
-import { LoadingOverlayContext } from "../../store/loading-overlay-context";
+import { ToastContext } from "../../../store/toast-context";
+import { LoadingOverlayContext } from "../../../store/loading-overlay-context";
 import { UseMutationResult } from "@tanstack/react-query";
 
 export function useResponsiveMutation(
   mutationResult: UseMutationResult<any, Error, any, unknown>,
-  successMsg: string
+  successMsg: string,
+  successCallback?: () => void
 ) {
   const { displayToast } = useContext(ToastContext);
   const { showLoadingOverlay, hideLoadingOverlay } = useContext(
@@ -17,9 +18,12 @@ export function useResponsiveMutation(
       showLoadingOverlay();
     } else {
       hideLoadingOverlay();
-      if (mutationResult.isSuccess) displayToast("success", successMsg);
-      else if (mutationResult.isError && mutationResult.failureReason)
+      if (mutationResult.isSuccess) {
+        displayToast("success", successMsg);
+        if (successCallback) successCallback();
+      } else if (mutationResult.isError && mutationResult.failureReason) {
         displayToast("error", mutationResult.failureReason.message);
+      }
     }
   }, [
     mutationResult.isSuccess,

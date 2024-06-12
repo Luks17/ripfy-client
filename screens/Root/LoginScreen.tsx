@@ -10,7 +10,7 @@ import { hasError } from "../../lib/validation/common";
 import { useLoginQuery } from "../../lib/network/auth/useLoginQuery";
 import { AuthContext } from "../../store/auth-context";
 import { colors } from "../../lib/constants/colors";
-import { useResponsiveMutation } from "../../lib/hooks/useResponsiveMutation";
+import { useResponsiveMutation } from "../../lib/hooks/mutations/useResponsiveMutation";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
