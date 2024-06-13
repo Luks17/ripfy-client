@@ -12,4 +12,7 @@ function getApiEndpoint() {
 export default {
   apiEndpoint: getApiEndpoint(),
   apiKey: process.env.API_KEY || "",
+  apiTokenExpirationTime: parseInt(
+    process.env.API_TOKEN_REFRESH_TIMER || "1140"
+  ),
 };

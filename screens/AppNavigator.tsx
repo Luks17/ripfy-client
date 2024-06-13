@@ -3,8 +3,22 @@ import { AppTabs } from "../lib/navigation/appTabs";
 import SongsScreen from "../screens/App/SongsScreen";
 import PlaylistScreen from "./App/PlaylistScreen";
 import AddSong from "../components/core/AddSong";
+import { useContext, useEffect } from "react";
+import { tryRefreshSession } from "../lib/network/session";
+import { AuthContext } from "../store/auth-context";
+import Config from "../lib/network/config";
 
 function AppNavigator() {
+  const { authenticate, clearSession } = useContext(AuthContext);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      tryRefreshSession(authenticate, clearSession);
+    }, 1000 * Config.apiTokenExpirationTime);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <AppTabs.Navigator
       screenOptions={{
