@@ -7,6 +7,7 @@ import { useContext, useEffect } from "react";
 import { tryRefreshSession } from "../lib/network/session";
 import { AuthContext } from "../store/auth-context";
 import Config from "../lib/network/config";
+import { colors } from "../lib/constants/colors";
 
 function AppNavigator() {
   const { authenticate, clearSession } = useContext(AuthContext);
@@ -24,6 +25,9 @@ function AppNavigator() {
       screenOptions={{
         headerRight: () => <AddSong />,
         headerRightContainerStyle: { paddingHorizontal: 16 },
+        headerStyle: { backgroundColor: colors.base300 },
+        tabBarStyle: { backgroundColor: colors.base300 },
+        headerTintColor: colors.baseContent,
       }}
     >
       <AppTabs.Screen
@@ -31,7 +35,9 @@ function AppNavigator() {
         component={SongsScreen}
         options={{
           tabBarIcon: () => {
-            return <FontAwesome6 name="music" size={22} color="black" />;
+            return (
+              <FontAwesome6 name="music" size={22} color={colors.baseContent} />
+            );
           },
         }}
       />
@@ -44,7 +50,7 @@ function AppNavigator() {
               <MaterialCommunityIcons
                 name="playlist-music"
                 size={30}
-                color="black"
+                color={colors.baseContent}
               />
             );
           },

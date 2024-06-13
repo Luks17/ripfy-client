@@ -31,7 +31,11 @@ function AddSong() {
 
   return (
     <>
-      <IconBtn onPress={showModal} icon="pluscircleo" color="black" />
+      <IconBtn
+        onPress={showModal}
+        icon="pluscircleo"
+        color={colors.baseContent}
+      />
       <SlideUpModal
         isModalVisible={isModalVisible}
         closeModalHandler={hideModal}
