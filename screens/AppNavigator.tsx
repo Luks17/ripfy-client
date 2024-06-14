@@ -23,10 +23,9 @@ function AppNavigator() {
   return (
     <AppTabs.Navigator
       screenOptions={{
-        headerRight: () => <AddSong />,
         headerRightContainerStyle: { paddingHorizontal: 16 },
-        headerStyle: { backgroundColor: colors.base300 },
-        tabBarStyle: { backgroundColor: colors.base300 },
+        headerStyle: { backgroundColor: colors.base100 },
+        tabBarStyle: { backgroundColor: colors.base100 },
         headerTintColor: colors.baseContent,
       }}
     >
@@ -34,6 +33,7 @@ function AppNavigator() {
         name="Songs"
         component={SongsScreen}
         options={{
+          headerRight: () => <AddSong />,
           tabBarIcon: () => {
             return (
               <FontAwesome6 name="music" size={22} color={colors.baseContent} />
