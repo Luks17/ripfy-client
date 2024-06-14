@@ -17,9 +17,10 @@ function PlaylistScreen() {
 
   return (
     <View style={styles.container}>
-      <SearchBar />
       <FlatList
-        style={styles.playlistsContainer}
+        ListHeaderComponent={SearchBar}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.playlistsContainer}
         data={data}
         keyExtractor={(item) => item.id}
         renderItem={renderPlaylist}
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.base300,
   },
   playlistsContainer: {
-    paddingVertical: 30,
+    paddingVertical: 10,
   },
 });
 

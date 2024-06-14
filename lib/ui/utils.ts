@@ -1,1 +1,1 @@
-export const addOpacity = (color: string) => color + "50";
+export const addOpacity = (color: string, amount = "50") => color + amount;

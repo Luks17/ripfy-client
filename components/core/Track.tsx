@@ -1,68 +1,55 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Song } from "../../lib/constants/responses/song";
+import { colors } from "../../lib/constants/colors";
+import { addOpacity } from "../../lib/ui/utils";
 
 function Track({ song }: { song: Song }) {
   return (
-    <View style={styles.buttonStack}>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.nomeMusica}>{song.title}</Text>
-        <View style={styles.nomeArtistaRow}>
-          <Text style={styles.nomeArtista}>{song.channel}</Text>
-          <Text style={styles.tempo}>00:00</Text>
+    <View>
+      <Pressable
+        style={styles.container}
+        android_ripple={{ color: colors.base100 }}
+      >
+        <Image
+          source={require("../../assets/unknown_artist.png")}
+          resizeMode="contain"
+          style={styles.imageContainer}
+        ></Image>
+        <View style={styles.textContainer}>
+          <Text numberOfLines={2} ellipsizeMode="tail" style={styles.title}>
+            {song.title}
+          </Text>
+          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.desc}>
+            {song.channel}
+          </Text>
         </View>
-      </TouchableOpacity>
-      <Image
-        source={require("../../assets/unknown_artist.png")}
-        resizeMode="contain"
-        style={styles.image}
-      ></Image>
+      </Pressable>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  button: {
-    top: 0,
-    left: 31,
-    width: 316,
-    height: 89,
-    position: "absolute",
-    backgroundColor: "#E6E6E6",
+  container: {
+    flex: 1,
+    padding: 10,
+    borderRadius: 8,
   },
-  nomeMusica: {
-    color: "#121212",
+  imageContainer: {
+    width: 160,
+    height: 160,
+    borderRadius: 8,
+  },
+  textContainer: {
+    marginTop: 5,
+    paddingHorizontal: 5,
+    maxWidth: 150,
+  },
+  title: {
+    color: colors.baseContent,
     fontWeight: "bold",
-    marginTop: 14,
-    marginLeft: 63,
   },
-  nomeArtista: {
-    color: "#121212",
-    fontStyle: "italic",
-  },
-  tempo: {
-    color: "#121212",
-    marginLeft: 102,
-    marginTop: 3,
-  },
-  nomeArtistaRow: {
-    height: 20,
-    flexDirection: "row",
-    marginTop: 14,
-    marginLeft: 63,
-    marginRight: 24,
-  },
-  image: {
-    top: 20,
-    left: 2,
-    width: 109,
-    height: 49,
-    position: "absolute",
-  },
-  buttonStack: {
-    width: 347,
-    height: 89,
-    marginTop: 57,
-    marginLeft: -11,
+  desc: {
+    color: addOpacity(colors.baseContent, "80"),
   },
 });
 

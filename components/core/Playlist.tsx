@@ -1,6 +1,7 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { colors } from "../../lib/constants/colors";
 import IconBtn from "../buttons/IconBtn";
+import { addOpacity } from "../../lib/ui/utils";
 
 interface Props {
   title: string;
@@ -9,9 +10,9 @@ interface Props {
 
 function Playlist({ title, nTracks }: Props) {
   return (
-    <View style={styles.container}>
+    <View>
       <Pressable
-        style={styles.playlistContainer}
+        style={styles.container}
         android_ripple={{ color: colors.base100 }}
       >
         <Image
@@ -38,9 +39,6 @@ function Playlist({ title, nTracks }: Props) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-  },
-  playlistContainer: {
-    flexDirection: "row",
     flex: 1,
     paddingVertical: 10,
     paddingHorizontal: 12,
@@ -50,9 +48,10 @@ const styles = StyleSheet.create({
     height: 80,
   },
   detailsContainer: {
-    padding: 20,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
     justifyContent: "center",
-    rowGap: 10,
+    rowGap: 5,
     flex: 1,
   },
   title: {
@@ -61,7 +60,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   desc: {
-    color: colors.secondary,
+    color: addOpacity(colors.baseContent, "80"),
   },
   iconContainer: {
     justifyContent: "center",

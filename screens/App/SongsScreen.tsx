@@ -17,9 +17,12 @@ function SongsScreen() {
 
   return (
     <View style={styles.container}>
-      <SearchBar />
       <FlatList
         data={data}
+        numColumns={2}
+        ListHeaderComponent={SearchBar}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.songsContainer}
         keyExtractor={(item) => item.id}
         renderItem={renderTrack}
       />
@@ -31,6 +34,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.base300,
+  },
+  songsContainer: {
+    paddingVertical: 20,
+    alignSelf: "center",
   },
 });
 

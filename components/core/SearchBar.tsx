@@ -16,24 +16,22 @@ function SearchBar() {
 }
 
 const styles = StyleSheet.create({
+  pesquisarStack: {
+    marginVertical: 20,
+    width: "100%",
+    alignItems: "center",
+    position: "relative",
+  },
   pesquisar: {
-    top: -50,
-    left: 0,
-    borderRadius: 15,
-    position: "absolute",
     color: "#f08316",
     height: 40,
     width: 298,
     backgroundColor: "#fff",
   },
   group: {
-    top: -40,
-    left: 256,
+    right: 64,
+    top: 7,
     position: "absolute",
-  },
-  pesquisarStack: {
-    marginTop: 60,
-    marginLeft: 34,
   },
 });
 
