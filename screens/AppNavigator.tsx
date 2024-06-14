@@ -8,6 +8,7 @@ import { tryRefreshSession } from "../lib/network/session";
 import { AuthContext } from "../store/auth-context";
 import Config from "../lib/network/config";
 import { colors } from "../lib/constants/colors";
+import AddPlaylist from "../components/core/AddPlaylist";
 
 function AppNavigator() {
   const { authenticate, clearSession } = useContext(AuthContext);
@@ -45,6 +46,7 @@ function AppNavigator() {
         name="Playlists"
         component={PlaylistScreen}
         options={{
+          headerRight: () => <AddPlaylist />,
           tabBarIcon: () => {
             return (
               <MaterialCommunityIcons

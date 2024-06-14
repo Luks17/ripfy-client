@@ -1,15 +1,29 @@
-import { StyleSheet, View } from "react-native";
+import { FlatList, ListRenderItemInfo, StyleSheet, View } from "react-native";
 import { colors } from "../../lib/constants/colors";
 import SearchBar from "../../components/core/SearchBar";
-import Playlist from "../../components/core/Playlist";
+import PlaylistComponent from "../../components/core/Playlist";
+import { useGetPlaylistsQuery } from "../../lib/hooks/queries/playlists/useGetPlaylistsQuery";
+import LoadingIndicator from "../../components/feedback/LoadingIndicator";
+import { Playlist } from "../../lib/constants/responses/playlist";
 
 function PlaylistScreen() {
+  const { data, isPending } = useGetPlaylistsQuery();
+
+  function renderPlaylist({ item }: ListRenderItemInfo<Playlist>) {
+    return <PlaylistComponent title={item.title} nTracks={57} />;
+  }
+
+  if (isPending) return <LoadingIndicator />;
+
   return (
     <View style={styles.container}>
       <SearchBar />
-      <View style={styles.playlistsContainer}>
-        <Playlist title="Gym" nTracks={57} />
-      </View>
+      <FlatList
+        style={styles.playlistsContainer}
+        data={data}
+        keyExtractor={(item) => item.id}
+        renderItem={renderPlaylist}
+      />
     </View>
   );
 }
