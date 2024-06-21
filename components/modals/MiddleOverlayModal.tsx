@@ -14,10 +14,14 @@ interface Props {
   closeModalHandler: () => void;
 }
 
-function SlideUpModal({ children, isModalVisible, closeModalHandler }: Props) {
+function MiddleOverlayModal({
+  children,
+  isModalVisible,
+  closeModalHandler,
+}: Props) {
   return (
     <Modal
-      animationType="slide"
+      animationType="fade"
       transparent={true}
       visible={isModalVisible}
       onRequestClose={closeModalHandler}
@@ -32,18 +36,15 @@ function SlideUpModal({ children, isModalVisible, closeModalHandler }: Props) {
 }
 
 const styles = StyleSheet.create({
-  useAll: { flex: 1 },
+  useAll: { flex: 1, justifyContent: "center", alignItems: "center" },
   modalContainer: {
     position: "absolute",
-    height: "35%",
-    width: "100%",
-    bottom: 0,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
     overflow: "hidden",
-    backgroundColor: colors.tertiary,
-    padding: 40,
+    backgroundColor: colors.base100,
+    borderWidth: 1,
+    borderColor: colors.primary,
+    borderRadius: 5,
   },
 });
 
-export default SlideUpModal;
+export default MiddleOverlayModal;

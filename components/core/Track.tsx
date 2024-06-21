@@ -3,11 +3,19 @@ import { Song } from "../../lib/constants/responses/song";
 import { colors } from "../../lib/constants/colors";
 import { addOpacity } from "../../lib/ui/utils";
 
-function Track({ song }: { song: Song }) {
+interface Props {
+  song: Song;
+  pressHandler?: (songId: string) => void;
+  longPressHandler?: (songId: string) => void;
+}
+
+function Track({ song, pressHandler, longPressHandler }: Props) {
   return (
     <View>
       <Pressable
         style={styles.container}
+        onPress={pressHandler?.bind(null, song.id)}
+        onLongPress={longPressHandler?.bind(null, song.id)}
         android_ripple={{ color: colors.base100 }}
       >
         <Image

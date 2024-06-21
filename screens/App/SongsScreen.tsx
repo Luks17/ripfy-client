@@ -5,12 +5,23 @@ import { useGetSongsQuery } from "../../lib/hooks/queries/songs/useGetSongsQuery
 import LoadingIndicator from "../../components/feedback/LoadingIndicator";
 import { Song } from "../../lib/constants/responses/song";
 import SearchBar from "../../components/core/SearchBar";
+import { useState } from "react";
+import TrackOptions from "../../components/core/TrackOptions";
 
 function SongsScreen() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [longPressTargetTrack, setLongPressTargetTrack] = useState("");
+
   const { data, isPending } = useGetSongsQuery();
 
+  const openModal = (id: string) => {
+    setLongPressTargetTrack(id);
+    setIsModalOpen(true);
+  };
+  const closeModal = () => setIsModalOpen(false);
+
   function renderTrack({ item }: ListRenderItemInfo<Song>) {
-    return <Track song={item} />;
+    return <Track song={item} longPressHandler={openModal} />;
   }
 
   if (isPending) return <LoadingIndicator />;
@@ -26,6 +37,11 @@ function SongsScreen() {
         keyExtractor={(item) => item.id}
         renderItem={renderTrack}
       />
+      <TrackOptions
+        showModal={isModalOpen}
+        closeModalHandler={closeModal}
+        targetTrackId={longPressTargetTrack}
+      />
     </View>
   );
 }
@@ -36,7 +52,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.base300,
   },
   songsContainer: {
-    paddingVertical: 20,
+    paddingVertical: 10,
     alignSelf: "center",
   },
 });
