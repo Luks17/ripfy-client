@@ -4,10 +4,7 @@ import { StyleSheet, TextInput, View } from "react-native";
 function SearchBar() {
   return (
     <View style={styles.pesquisarStack}>
-      <TextInput
-        placeholder="  pesquisar..."
-        style={styles.pesquisar}
-      ></TextInput>
+      <TextInput placeholder="  pesquisar..." style={styles.pesquisar} />
       <View style={styles.group}>
         <FontAwesome name="search" size={24} color="black" />
       </View>

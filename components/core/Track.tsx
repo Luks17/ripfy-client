@@ -22,7 +22,7 @@ function Track({ song, pressHandler, longPressHandler }: Props) {
           source={require("../../assets/unknown_artist.png")}
           resizeMode="contain"
           style={styles.imageContainer}
-        ></Image>
+        />
         <View style={styles.textContainer}>
           <Text numberOfLines={2} ellipsizeMode="tail" style={styles.title}>
             {song.title}

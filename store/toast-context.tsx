@@ -25,11 +25,11 @@ function toastReducer(
     payload?: { toastType: ToastTypes; msg: string };
   }
 ): ToastValues {
-  if (action.type === "display") {
+  if (action.type === "display" && action.payload !== undefined) {
     return {
       isToastDisplayed: true,
-      toastType: action.payload!.toastType,
-      msg: action.payload!.msg,
+      toastType: action.payload.toastType,
+      msg: action.payload.msg,
     };
   } else if (action.type === "hide") {
     return {

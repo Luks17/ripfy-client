@@ -19,7 +19,7 @@ function AppNavigator() {
     }, 1000 * Config.apiTokenExpirationTime);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [authenticate, clearSession]);
 
   return (
     <AppTabs.Navigator

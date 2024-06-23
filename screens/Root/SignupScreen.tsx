@@ -44,7 +44,7 @@ function SignupScreen({ navigation }: Props) {
     if (isSuccess) {
       navigation.navigate("Home");
     }
-  }, [isSuccess]);
+  }, [isSuccess, navigation.navigate]);
 
   return (
     <ScrollView style={styles.rootContainer}>

@@ -39,7 +39,7 @@ function LoginScreen({ navigation }: Props) {
     if (data !== undefined) {
       authenticate(data);
     }
-  }, [data]);
+  }, [data, authenticate]);
 
   return (
     <View style={styles.rootContainer}>

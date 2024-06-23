@@ -26,8 +26,11 @@ export function useResponsiveMutation(
       }
     }
   }, [
-    mutationResult.isSuccess,
-    mutationResult.isError,
-    mutationResult.isPending,
+    mutationResult,
+    successCallback,
+    showLoadingOverlay,
+    hideLoadingOverlay,
+    displayToast,
+    successMsg,
   ]);
 }

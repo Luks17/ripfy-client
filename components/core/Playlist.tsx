@@ -19,7 +19,7 @@ function Playlist({ title, nTracks }: Props) {
           source={require("../../assets/unknown_artist.png")}
           resizeMode="contain"
           style={styles.imageContainer}
-        ></Image>
+        />
         <View style={styles.detailsContainer}>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.desc}>{nTracks} músicas</Text>

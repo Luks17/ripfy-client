@@ -1,4 +1,9 @@
-import { FlatList, type ListRenderItemInfo, StyleSheet, View } from "react-native";
+import {
+  FlatList,
+  type ListRenderItemInfo,
+  StyleSheet,
+  View,
+} from "react-native";
 import { colors } from "../../lib/constants/colors";
 import Track from "../../components/core/Track";
 import { useGetSongsQuery } from "../../lib/hooks/queries/songs/useGetSongsQuery";
