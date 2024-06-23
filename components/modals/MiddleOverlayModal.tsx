@@ -6,7 +6,7 @@ import {
   View,
 } from "react-native";
 import { colors } from "../../lib/constants/colors";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;

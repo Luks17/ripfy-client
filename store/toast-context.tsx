@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useReducer } from "react";
+import { type ReactNode, createContext, useReducer } from "react";
 import ToastNotification from "../components/feedback/ToastNotification";
 
 interface ProviderProps {

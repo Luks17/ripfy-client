@@ -1,6 +1,6 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StyleSheet, Text, View } from "react-native";
-import { RootStackParamList } from "../../lib/navigation/root";
+import type { RootStackParamList } from "../../lib/navigation/root";
 import PrimaryButton from "../../components/buttons/PrimaryBtn";
 import { colors } from "../../lib/constants/colors";
 

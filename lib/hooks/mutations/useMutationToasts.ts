@@ -1,4 +1,4 @@
-import { UseMutationResult } from "@tanstack/react-query";
+import type { UseMutationResult } from "@tanstack/react-query";
 import { useContext, useEffect } from "react";
 import { ToastContext } from "../../../store/toast-context";
 

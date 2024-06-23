@@ -1,12 +1,12 @@
-import React from "react";
+import type React from "react";
 import {
-  GestureResponderEvent,
+  type GestureResponderEvent,
   Pressable,
-  StyleProp,
+  type StyleProp,
   StyleSheet,
   Text,
   View,
-  ViewStyle,
+  type ViewStyle,
 } from "react-native";
 import { colors } from "../../lib/constants/colors";
 

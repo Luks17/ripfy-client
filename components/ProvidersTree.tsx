@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AuthContextProvider from "../store/auth-context";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import ToastContextProvider from "../store/toast-context";
 import LoaderOverlayProvider from "../store/loading-overlay-context";
 

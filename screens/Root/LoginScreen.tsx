@@ -1,8 +1,8 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StyleSheet, Text, View } from "react-native";
 import { useContext, useEffect, useState } from "react";
 
-import { RootStackParamList } from "../../lib/navigation/root";
+import type { RootStackParamList } from "../../lib/navigation/root";
 import PrimaryButton from "../../components/buttons/PrimaryBtn";
 import InputField from "../../components/forms/InputField";
 import { validate } from "../../lib/validation/login";

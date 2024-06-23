@@ -1,4 +1,4 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import {
   KeyboardAvoidingView,
   ScrollView,
@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from "react-native";
-import { RootStackParamList } from "../../lib/navigation/root";
+import type { RootStackParamList } from "../../lib/navigation/root";
 import { useEffect, useState } from "react";
 
 import PrimaryButton from "../../components/buttons/PrimaryBtn";

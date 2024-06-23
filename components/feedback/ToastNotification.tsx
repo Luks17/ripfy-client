@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import Animated, { FadeInUp, FadeOutUp } from "react-native-reanimated";
 import { colors } from "../../lib/constants/colors";
-import { ToastTypes } from "../../store/toast-context";
+import type { ToastTypes } from "../../store/toast-context";
 import { useEffect } from "react";
 
 interface Props {

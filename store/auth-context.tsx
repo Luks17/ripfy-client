@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ReactNode, createContext, useState } from "react";
+import { type ReactNode, createContext, useState } from "react";
 import { REFRESH_TOKEN } from "../lib/constants/tokens";
-import { AuthExpectedData } from "../lib/constants/responses/auth";
+import type { AuthExpectedData } from "../lib/constants/responses/auth";
 
 interface ProviderProps {
   children: ReactNode;

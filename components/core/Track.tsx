@@ -1,5 +1,5 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import { Song } from "../../lib/constants/responses/song";
+import type { Song } from "../../lib/constants/responses/song";
 import { colors } from "../../lib/constants/colors";
 import { addOpacity } from "../../lib/ui/utils";
 

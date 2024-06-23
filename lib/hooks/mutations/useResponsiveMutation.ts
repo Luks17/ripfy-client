@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { ToastContext } from "../../../store/toast-context";
 import { LoadingOverlayContext } from "../../../store/loading-overlay-context";
-import { UseMutationResult } from "@tanstack/react-query";
+import type { UseMutationResult } from "@tanstack/react-query";
 
 export function useResponsiveMutation(
   mutationResult: UseMutationResult<any, Error, any, unknown>,

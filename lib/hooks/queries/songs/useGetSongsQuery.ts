@@ -1,5 +1,5 @@
-import { ApiResponse } from "../../../constants/response";
-import { Song } from "../../../constants/responses/song";
+import type { ApiResponse } from "../../../constants/response";
+import type { Song } from "../../../constants/responses/song";
 import Config from "../../../network/config";
 import { useQuery } from "@tanstack/react-query";
 import { ClientError } from "../../../network/error";

@@ -1,11 +1,11 @@
 import {
-  StyleProp,
+  type StyleProp,
   StyleSheet,
   Text,
   TextInput,
-  TextStyle,
+  type TextStyle,
   View,
-  ViewStyle,
+  type ViewStyle,
 } from "react-native";
 import { addOpacity } from "../../lib/ui/utils";
 import { colors } from "../../lib/constants/colors";
@@ -31,7 +31,7 @@ function InputField({
   secure = false,
   error = false,
 }: Props) {
-  let textInputStyles: StyleProp<TextStyle> = [styles.textInput];
+  const textInputStyles: StyleProp<TextStyle> = [styles.textInput];
 
   if (value) textInputStyles.push({ borderBottomColor: inputFieldColor });
   if (error) textInputStyles.push({ borderBottomColor: colors.error });

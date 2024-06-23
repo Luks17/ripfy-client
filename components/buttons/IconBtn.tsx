@@ -1,5 +1,5 @@
 import { AntDesign, Entypo } from "@expo/vector-icons";
-import { GestureResponderEvent, Pressable } from "react-native";
+import { type GestureResponderEvent, Pressable } from "react-native";
 
 type AntDesignIcon = keyof typeof AntDesign.glyphMap;
 type EntypoIcon = keyof typeof Entypo.glyphMap;

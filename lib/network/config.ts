@@ -1,7 +1,7 @@
 import Constants from "expo-constants";
 
 function getApiEndpoint() {
-  const apiPort = parseInt(process.env.API_PORT || "7717");
+  const apiPort = Number.parseInt(process.env.API_PORT || "7717");
 
   return (
     process.env.API_URL ||
@@ -12,7 +12,7 @@ function getApiEndpoint() {
 export default {
   apiEndpoint: getApiEndpoint(),
   apiKey: process.env.API_KEY || "",
-  apiTokenExpirationTime: parseInt(
+  apiTokenExpirationTime: Number.parseInt(
     process.env.API_TOKEN_REFRESH_TIMER || "1140"
   ),
 };
