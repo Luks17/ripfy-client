@@ -17,5 +17,5 @@ export function useMutationToasts(
     } else if (mutationResult.isError && mutationResult.failureReason) {
       displayToast("error", mutationResult.failureReason.message);
     }
-  }, [mutationResult, successCallback, displayToast, successMsg]);
+  }, [mutationResult.isSuccess, mutationResult.isError]);
 }

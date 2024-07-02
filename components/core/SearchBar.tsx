@@ -1,34 +1,46 @@
-import { FontAwesome } from "@expo/vector-icons";
-import { StyleSheet, TextInput, View } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import { Pressable, StyleSheet, TextInput, View } from "react-native";
+import { colors } from "../../lib/constants/colors";
+import { useRef } from "react";
 
 function SearchBar() {
+  const inputContainer = useRef<TextInput | null>(null);
+
+  function focusInput() {
+    inputContainer.current!.focus();
+  }
+
   return (
-    <View style={styles.pesquisarStack}>
-      <TextInput placeholder="  pesquisar..." style={styles.pesquisar} />
-      <View style={styles.group}>
-        <FontAwesome name="search" size={24} color="black" />
-      </View>
+    <View style={styles.container}>
+      <Pressable onPress={focusInput}>
+        <AntDesign
+          style={styles.iconContainer}
+          name="search1"
+          color={colors.accent}
+          size={20}
+        />
+      </Pressable>
+      <TextInput style={styles.input} ref={inputContainer} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  pesquisarStack: {
-    marginVertical: 20,
-    width: "100%",
-    alignItems: "center",
-    position: "relative",
+  container: {
+    flexDirection: "row",
+    backgroundColor: colors.base100,
+    overflow: "hidden",
+    borderRadius: 5,
+    elevation: 5,
+    padding: 2,
   },
-  pesquisar: {
-    color: "#f08316",
-    height: 40,
-    width: 298,
-    backgroundColor: "#fff",
+  iconContainer: {
+    padding: 5,
   },
-  group: {
-    right: 64,
-    top: 7,
-    position: "absolute",
+  input: {
+    width: 300,
+    fontSize: 16,
+    color: colors.baseContent,
   },
 });
 
