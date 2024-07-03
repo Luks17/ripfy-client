@@ -6,13 +6,15 @@ import { ClientError } from "../../../network/error";
 import { useContext } from "react";
 import { AuthContext } from "../../../../store/auth-context";
 
-export const useGetSongsQuery = () => {
+export const useGetSongsQuery = (searchQuery: string) => {
   const { token } = useContext(AuthContext);
 
+  const queryParams = searchQuery ? `?search=${searchQuery}` : "";
+
   return useQuery({
-    queryKey: ["songs"],
+    queryKey: ["songs", searchQuery],
     queryFn: () =>
-      fetch(`${Config.apiEndpoint}/api/songs`, {
+      fetch(`${Config.apiEndpoint}/api/songs${queryParams}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

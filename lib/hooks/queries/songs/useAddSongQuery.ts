@@ -31,7 +31,7 @@ export const useAddSongQuery = () => {
         return resBody.data!;
       }),
     onSuccess: (song) => {
-      queryClient.setQueryData<Song[]>(["songs"], (old) =>
+      queryClient.setQueryData<Song[]>(["songs", ""], (old) =>
         old !== undefined ? [...old, song] : [song]
       );
     },

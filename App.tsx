@@ -25,7 +25,7 @@ function AppSetup() {
     tryRefreshSession(authenticate, clearSession).then(() =>
       setIsAppReady(true)
     );
-  }, [authenticate, clearSession]);
+  }, []);
 
   useEffect(() => {
     if (isAppReady) SplashScreen.hideAsync();

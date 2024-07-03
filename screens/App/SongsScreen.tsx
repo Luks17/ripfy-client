@@ -10,14 +10,19 @@ import { useGetSongsQuery } from "../../lib/hooks/queries/songs/useGetSongsQuery
 import LoadingIndicator from "../../components/feedback/LoadingIndicator";
 import type { Song } from "../../lib/constants/responses/song";
 import SearchBar from "../../components/core/SearchBar";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import TrackOptions from "../../components/core/TrackOptions";
 
 function SongsScreen() {
+  const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [longPressTargetTrack, setLongPressTargetTrack] = useState("");
 
-  const { data, isPending } = useGetSongsQuery();
+  const { data, isPending } = useGetSongsQuery(searchQuery);
+
+  const searchUpdateHandler = useCallback((value: string) => {
+    setSearchQuery(value);
+  }, []);
 
   const openModal = (id: string) => {
     setLongPressTargetTrack(id);
@@ -29,19 +34,26 @@ function SongsScreen() {
     return <Track song={item} longPressHandler={openModal} />;
   }
 
-  if (isPending) return <LoadingIndicator />;
-
   return (
     <View style={styles.container}>
-      <FlatList
-        data={data}
-        numColumns={2}
-        ListHeaderComponent={SearchBar}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.songsContainer}
-        keyExtractor={(item) => item.id}
-        renderItem={renderTrack}
-      />
+      {isPending || data === undefined ? (
+        <LoadingIndicator />
+      ) : (
+        <FlatList
+          data={data}
+          numColumns={2}
+          ListHeaderComponent={
+            <SearchBar
+              initialSearch={searchQuery}
+              onChange={searchUpdateHandler}
+            />
+          }
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.songsContainer}
+          keyExtractor={(item) => item.id}
+          renderItem={renderTrack}
+        />
+      )}
       <TrackOptions
         showModal={isModalOpen}
         closeModalHandler={closeModal}

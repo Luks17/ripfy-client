@@ -1,13 +1,25 @@
 import { AntDesign } from "@expo/vector-icons";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { colors } from "../../lib/constants/colors";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
-function SearchBar() {
+interface Props {
+  initialSearch: string;
+  onChange: (value: string) => void;
+}
+
+function SearchBar({ initialSearch, onChange }: Props) {
+  const [value, setValue] = useState(initialSearch);
   const inputContainer = useRef<TextInput | null>(null);
+
+  const updateText = (text: string) => setValue(text);
 
   function focusInput() {
     inputContainer.current!.focus();
+  }
+
+  function blurHandler() {
+    onChange(value);
   }
 
   return (
@@ -20,7 +32,13 @@ function SearchBar() {
           size={20}
         />
       </Pressable>
-      <TextInput style={styles.input} ref={inputContainer} />
+      <TextInput
+        value={value}
+        onChangeText={updateText}
+        onBlur={blurHandler}
+        style={styles.input}
+        ref={inputContainer}
+      />
     </View>
   );
 }
