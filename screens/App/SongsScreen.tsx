@@ -31,29 +31,26 @@ function SongsScreen() {
   const closeModal = () => setIsModalOpen(false);
 
   function renderTrack({ item }: ListRenderItemInfo<Song>) {
+    if (isPending || data === undefined) return <LoadingIndicator />;
     return <Track song={item} longPressHandler={openModal} />;
   }
 
   return (
     <View style={styles.container}>
-      {isPending || data === undefined ? (
-        <LoadingIndicator />
-      ) : (
-        <FlatList
-          data={data}
-          numColumns={2}
-          ListHeaderComponent={
-            <SearchBar
-              initialSearch={searchQuery}
-              onChange={searchUpdateHandler}
-            />
-          }
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.songsContainer}
-          keyExtractor={(item) => item.id}
-          renderItem={renderTrack}
-        />
-      )}
+      <FlatList
+        data={data}
+        numColumns={2}
+        ListHeaderComponent={
+          <SearchBar
+            initialSearch={searchQuery}
+            onChange={searchUpdateHandler}
+          />
+        }
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.songsContainer}
+        keyExtractor={(item) => item.id}
+        renderItem={renderTrack}
+      />
       <TrackOptions
         showModal={isModalOpen}
         closeModalHandler={closeModal}

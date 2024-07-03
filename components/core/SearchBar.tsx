@@ -1,7 +1,8 @@
 import { AntDesign } from "@expo/vector-icons";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { colors } from "../../lib/constants/colors";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useIsKeyboardVisible } from "../../lib/hooks/useIsKeyboardVisible";
 
 interface Props {
   initialSearch: string;
@@ -11,6 +12,7 @@ interface Props {
 function SearchBar({ initialSearch, onChange }: Props) {
   const [value, setValue] = useState(initialSearch);
   const inputContainer = useRef<TextInput | null>(null);
+  const isKeyboardVisible = useIsKeyboardVisible();
 
   const updateText = (text: string) => setValue(text);
 
@@ -18,9 +20,11 @@ function SearchBar({ initialSearch, onChange }: Props) {
     inputContainer.current!.focus();
   }
 
-  function blurHandler() {
-    onChange(value);
-  }
+  useEffect(() => {
+    if (!isKeyboardVisible) {
+      onChange(value);
+    }
+  }, [isKeyboardVisible]);
 
   return (
     <View style={styles.container}>
@@ -35,7 +39,6 @@ function SearchBar({ initialSearch, onChange }: Props) {
       <TextInput
         value={value}
         onChangeText={updateText}
-        onBlur={blurHandler}
         style={styles.input}
         ref={inputContainer}
       />
