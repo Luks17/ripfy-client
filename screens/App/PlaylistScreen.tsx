@@ -10,20 +10,30 @@ import PlaylistComponent from "../../components/core/Playlist";
 import { useGetPlaylistsQuery } from "../../lib/hooks/queries/playlists/useGetPlaylistsQuery";
 import LoadingIndicator from "../../components/feedback/LoadingIndicator";
 import type { Playlist } from "../../lib/constants/responses/playlist";
+import { useCallback, useState } from "react";
 
 function PlaylistScreen() {
+  const [searchQuery, setSearchQuery] = useState("");
   const { data, isPending } = useGetPlaylistsQuery();
 
+  const searchUpdateHandler = useCallback((value: string) => {
+    setSearchQuery(value);
+  }, []);
+
   function renderPlaylist({ item }: ListRenderItemInfo<Playlist>) {
+    if (isPending) return <LoadingIndicator />;
     return <PlaylistComponent title={item.title} nTracks={57} />;
   }
-
-  if (isPending) return <LoadingIndicator />;
 
   return (
     <View style={styles.container}>
       <FlatList
-        ListHeaderComponent={SearchBar}
+        ListHeaderComponent={
+          <SearchBar
+            initialSearch={searchQuery}
+            onChange={searchUpdateHandler}
+          />
+        }
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.playlistsContainer}
         data={data}

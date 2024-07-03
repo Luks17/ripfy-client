@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     elevation: 5,
     padding: 2,
+    marginVertical: 5,
   },
   iconContainer: {
     padding: 5,

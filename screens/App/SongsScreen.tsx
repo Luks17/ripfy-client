@@ -31,7 +31,7 @@ function SongsScreen() {
   const closeModal = () => setIsModalOpen(false);
 
   function renderTrack({ item }: ListRenderItemInfo<Song>) {
-    if (isPending || data === undefined) return <LoadingIndicator />;
+    if (isPending) return <LoadingIndicator />;
     return <Track song={item} longPressHandler={openModal} />;
   }
 
