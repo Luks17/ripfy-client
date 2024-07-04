@@ -11,7 +11,7 @@ function LoadingIndicator({ occupyAll = true }: Props) {
       <ActivityIndicator size="large" color={colors.primary} />
     </View>
   ) : (
-    <ActivityIndicator size="large" color={colors.primary} />
+    <ActivityIndicator size="small" color={colors.primary} />
   );
 }
 

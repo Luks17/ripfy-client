@@ -3,6 +3,8 @@ import MiddleOverlayModal from "../modals/MiddleOverlayModal";
 import { colors } from "../../lib/constants/colors";
 import type { Song } from "../../lib/constants/responses/song";
 import MenuBtn from "../buttons/MenuBtn";
+import { useDeleteSongQuery } from "../../lib/hooks/queries/songs/useDeleteSongQuery";
+import { useEffect } from "react";
 
 interface Props {
   showModal: boolean;
@@ -11,6 +13,16 @@ interface Props {
 }
 
 function TrackOptions({ showModal, closeModalHandler, targetTrack }: Props) {
+  const { mutate, isPending, isSuccess } = useDeleteSongQuery();
+
+  useEffect(() => {
+    if (isSuccess) closeModalHandler();
+  }, [isSuccess]);
+
+  function deleteTrackBtnPressHandler(track_id: string) {
+    mutate(track_id);
+  }
+
   if (!targetTrack) return null;
 
   return (
@@ -26,7 +38,12 @@ function TrackOptions({ showModal, closeModalHandler, targetTrack }: Props) {
         />
         <Text style={styles.title}>{targetTrack.title}</Text>
       </View>
-      <MenuBtn text="Deletar música" icon="squared-minus" />
+      <MenuBtn
+        onPress={() => deleteTrackBtnPressHandler(targetTrack.id)}
+        text="Deletar música"
+        icon="squared-minus"
+        isPending={isPending}
+      />
     </MiddleOverlayModal>
   );
 }
