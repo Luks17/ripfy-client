@@ -1,7 +1,7 @@
 import {
   Modal,
+  Pressable,
   StyleSheet,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
@@ -26,24 +26,33 @@ function MiddleOverlayModal({
       visible={isModalVisible}
       onRequestClose={closeModalHandler}
     >
-      <TouchableOpacity onPress={closeModalHandler} style={styles.useAll}>
-        <TouchableWithoutFeedback>
-          <View style={styles.modalContainer}>{children}</View>
-        </TouchableWithoutFeedback>
-      </TouchableOpacity>
+      <Pressable onPress={closeModalHandler} style={styles.useAll}>
+        <View style={styles.overlayOpacity}>
+          <TouchableWithoutFeedback>
+            <View style={styles.modalContainer}>{children}</View>
+          </TouchableWithoutFeedback>
+        </View>
+      </Pressable>
     </Modal>
   );
 }
 
 const styles = StyleSheet.create({
-  useAll: { flex: 1, justifyContent: "center", alignItems: "center" },
+  useAll: {
+    flex: 1,
+  },
+  overlayOpacity: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   modalContainer: {
+    elevation: 6,
     position: "absolute",
     overflow: "hidden",
     backgroundColor: colors.base100,
-    borderWidth: 1,
-    borderColor: colors.primary,
-    borderRadius: 5,
+    borderRadius: 4,
   },
 });
 

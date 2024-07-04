@@ -16,7 +16,9 @@ import TrackOptions from "../../components/core/TrackOptions";
 function SongsScreen() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [longPressTargetTrack, setLongPressTargetTrack] = useState("");
+  const [longPressTargetTrack, setLongPressTargetTrack] = useState<null | Song>(
+    null
+  );
 
   const { data, isPending } = useGetSongsQuery(searchQuery);
 
@@ -24,8 +26,8 @@ function SongsScreen() {
     setSearchQuery(value);
   }, []);
 
-  const openModal = (id: string) => {
-    setLongPressTargetTrack(id);
+  const openModal = (song: Song) => {
+    setLongPressTargetTrack(song);
     setIsModalOpen(true);
   };
   const closeModal = () => setIsModalOpen(false);
@@ -54,7 +56,7 @@ function SongsScreen() {
       <TrackOptions
         showModal={isModalOpen}
         closeModalHandler={closeModal}
-        targetTrackId={longPressTargetTrack}
+        targetTrack={longPressTargetTrack}
       />
     </View>
   );

@@ -43,7 +43,7 @@ function AppSetup() {
 export default function App() {
   return (
     <ProvidersTree>
-      <StatusBar style="inverted" />
+      <StatusBar style="light" />
       <AppSetup />
     </ProvidersTree>
   );

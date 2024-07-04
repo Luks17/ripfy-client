@@ -6,7 +6,7 @@ import { addOpacity } from "../../lib/ui/utils";
 interface Props {
   song: Song;
   pressHandler?: (songId: string) => void;
-  longPressHandler?: (songId: string) => void;
+  longPressHandler?: (song: Song) => void;
 }
 
 function Track({ song, pressHandler, longPressHandler }: Props) {
@@ -15,7 +15,7 @@ function Track({ song, pressHandler, longPressHandler }: Props) {
       <Pressable
         style={styles.container}
         onPress={pressHandler?.bind(null, song.id)}
-        onLongPress={longPressHandler?.bind(null, song.id)}
+        onLongPress={longPressHandler?.bind(null, song)}
         android_ripple={{ color: colors.base100 }}
       >
         <Image
