@@ -2,18 +2,33 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { colors } from "../../lib/constants/colors";
 import IconBtn from "../buttons/IconBtn";
 import { addOpacity } from "../../lib/ui/utils";
+import { useNavigation } from "@react-navigation/native";
+import type { Playlist as PlaylistType } from "../../lib/constants/responses/playlist";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { PlaylistStackParamList } from "../../lib/navigation/playlistStack";
 
 interface Props {
-  title: string;
-  nTracks: number;
+  playlist: PlaylistType;
 }
 
-function Playlist({ title, nTracks }: Props) {
+type PlaylistStackNavigationProps = NativeStackNavigationProp<
+  PlaylistStackParamList,
+  "Playlists"
+>;
+
+function Playlist({ playlist }: Props) {
+  const { navigate } = useNavigation<PlaylistStackNavigationProps>();
+
+  function pressHandler() {
+    navigate("VisualizePlaylist", playlist);
+  }
+
   return (
     <View>
       <Pressable
         style={styles.container}
         android_ripple={{ color: colors.base100 }}
+        onPress={pressHandler}
       >
         <Image
           source={require("../../assets/unknown_artist.png")}
@@ -21,8 +36,8 @@ function Playlist({ title, nTracks }: Props) {
           style={styles.imageContainer}
         />
         <View style={styles.detailsContainer}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.desc}>{nTracks} músicas</Text>
+          <Text style={styles.title}>{playlist.title}</Text>
+          <Text style={styles.desc}>{57} músicas</Text>
         </View>
         <View style={styles.iconContainer}>
           <IconBtn

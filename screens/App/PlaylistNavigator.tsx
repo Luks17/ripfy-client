@@ -1,9 +1,10 @@
 import AddPlaylist from "../../components/core/AddPlaylist";
 import { colors } from "../../lib/constants/colors";
 import { PlaylistStack } from "../../lib/navigation/playlistStack";
-import PlaylistsScreen from "./Playlist/PlaylistScreen";
+import PlaylistsScreen from "./Playlist/PlaylistsScreen";
+import VisualizePlaylistScreen from "./Playlist/VisualizePlaylistScreen";
 
-function PlaylistNavigator() {
+function PlaylistsNavigator() {
   return (
     <PlaylistStack.Navigator
       screenOptions={{
@@ -18,8 +19,12 @@ function PlaylistNavigator() {
           headerRight: () => <AddPlaylist />,
         }}
       />
+      <PlaylistStack.Screen
+        name="VisualizePlaylist"
+        component={VisualizePlaylistScreen}
+      />
     </PlaylistStack.Navigator>
   );
 }
 
-export default PlaylistNavigator;
+export default PlaylistsNavigator;

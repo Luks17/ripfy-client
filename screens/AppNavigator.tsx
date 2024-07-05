@@ -7,7 +7,7 @@ import { tryRefreshSession } from "../lib/network/session";
 import { AuthContext } from "../store/auth-context";
 import Config from "../lib/network/config";
 import { colors } from "../lib/constants/colors";
-import PlaylistNavigator from "./App/PlaylistNavigator";
+import PlaylistsNavigator from "./App/PlaylistNavigator";
 
 function AppNavigator() {
   const { authenticate, clearSession } = useContext(AuthContext);
@@ -43,7 +43,7 @@ function AppNavigator() {
       />
       <AppTabs.Screen
         name="PlaylistNavigator"
-        component={PlaylistNavigator}
+        component={PlaylistsNavigator}
         options={{
           headerShown: false,
           tabBarLabel: "Playlists",

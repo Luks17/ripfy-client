@@ -1,8 +1,9 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import type { Playlist } from "../constants/responses/playlist";
 
 export type PlaylistStackParamList = {
   Playlists: undefined;
-  PlaylistView: undefined;
+  VisualizePlaylist: Playlist;
 };
 
 export const PlaylistStack =

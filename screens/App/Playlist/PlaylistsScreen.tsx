@@ -22,7 +22,7 @@ function PlaylistsScreen() {
 
   function renderPlaylist({ item }: ListRenderItemInfo<Playlist>) {
     if (isPending) return <LoadingIndicator />;
-    return <PlaylistComponent title={item.title} nTracks={57} />;
+    return <PlaylistComponent playlist={item} />;
   }
 
   return (
