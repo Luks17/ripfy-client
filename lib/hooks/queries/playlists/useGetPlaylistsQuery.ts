@@ -6,13 +6,15 @@ import { useContext } from "react";
 import { AuthContext } from "../../../../store/auth-context";
 import type { Playlist } from "../../../constants/responses/playlist";
 
-export const useGetPlaylistsQuery = () => {
+export const useGetPlaylistsQuery = (searchQuery: string) => {
   const { token } = useContext(AuthContext);
 
+  const queryParams = searchQuery ? `?search=${searchQuery}` : "";
+
   return useQuery({
-    queryKey: ["playlists"],
+    queryKey: ["playlists", searchQuery],
     queryFn: () =>
-      fetch(`${Config.apiEndpoint}/api/playlists`, {
+      fetch(`${Config.apiEndpoint}/api/playlists${queryParams}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

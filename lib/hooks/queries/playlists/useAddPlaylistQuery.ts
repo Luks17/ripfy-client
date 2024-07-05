@@ -31,7 +31,7 @@ export const useAddPlaylistQuery = () => {
         return resBody.data!;
       }),
     onSuccess: (playlist) => {
-      queryClient.setQueryData<Playlist[]>(["playlists"], (old) =>
+      queryClient.setQueryData<Playlist[]>(["playlists", ""], (old) =>
         old !== undefined ? [...old, playlist] : [playlist]
       );
     },

@@ -14,7 +14,8 @@ import { useCallback, useState } from "react";
 
 function PlaylistsScreen() {
   const [searchQuery, setSearchQuery] = useState("");
-  const { data, isPending } = useGetPlaylistsQuery();
+
+  const { data, isPending } = useGetPlaylistsQuery(searchQuery);
 
   const searchUpdateHandler = useCallback((value: string) => {
     setSearchQuery(value);
