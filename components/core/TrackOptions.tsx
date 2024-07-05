@@ -5,6 +5,9 @@ import type { Song } from "../../lib/constants/responses/song";
 import MenuBtn from "../buttons/MenuBtn";
 import { useDeleteSongQuery } from "../../lib/hooks/queries/songs/useDeleteSongQuery";
 import { useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { SongsStackParamList } from "../../lib/navigation/songsStack";
 
 interface Props {
   showModal: boolean;
@@ -12,15 +15,27 @@ interface Props {
   targetTrack: Song | null;
 }
 
+type SongsStackNavigationProps = NativeStackNavigationProp<
+  SongsStackParamList,
+  "Songs"
+>;
+
 function TrackOptions({ showModal, closeModalHandler, targetTrack }: Props) {
-  const { mutate, isPending, isSuccess } = useDeleteSongQuery();
+  const { navigate } = useNavigation<SongsStackNavigationProps>();
+
+  const delTrackMutation = useDeleteSongQuery();
 
   useEffect(() => {
-    if (isSuccess) closeModalHandler();
-  }, [isSuccess]);
+    if (delTrackMutation.isSuccess) closeModalHandler();
+  }, [delTrackMutation.isSuccess]);
+
+  function openPlaylistSelectionScreen(track: Song) {
+    closeModalHandler();
+    navigate("AddSongToPlaylist", track);
+  }
 
   function deleteTrackBtnPressHandler(track_id: string) {
-    mutate(track_id);
+    delTrackMutation.mutate(track_id);
   }
 
   if (!targetTrack) return null;
@@ -39,10 +54,15 @@ function TrackOptions({ showModal, closeModalHandler, targetTrack }: Props) {
         <Text style={styles.title}>{targetTrack.title}</Text>
       </View>
       <MenuBtn
+        onPress={() => openPlaylistSelectionScreen(targetTrack)}
+        text="Adicionar a playlist"
+        icon="playlist-add"
+      />
+      <MenuBtn
         onPress={() => deleteTrackBtnPressHandler(targetTrack.id)}
         text="Deletar música"
         icon="squared-minus"
-        isPending={isPending}
+        isPending={delTrackMutation.isPending}
       />
     </MiddleOverlayModal>
   );

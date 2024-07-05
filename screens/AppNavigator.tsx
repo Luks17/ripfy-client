@@ -8,6 +8,7 @@ import { AuthContext } from "../store/auth-context";
 import Config from "../lib/network/config";
 import { colors } from "../lib/constants/colors";
 import PlaylistsNavigator from "./App/PlaylistNavigator";
+import SongsNavigator from "./App/SongsNavigator";
 
 function AppNavigator() {
   const { authenticate, clearSession } = useContext(AuthContext);
@@ -23,17 +24,15 @@ function AppNavigator() {
   return (
     <AppTabs.Navigator
       screenOptions={{
-        headerRightContainerStyle: { paddingHorizontal: 16 },
-        headerStyle: { backgroundColor: colors.base100 },
+        headerShown: false,
         tabBarStyle: { backgroundColor: colors.base100 },
-        headerTintColor: colors.baseContent,
       }}
     >
       <AppTabs.Screen
-        name="Songs"
-        component={SongsScreen}
+        name="SongsNavigator"
+        component={SongsNavigator}
         options={{
-          headerRight: () => <AddSong />,
+          tabBarLabel: "Songs",
           tabBarIcon: () => {
             return (
               <FontAwesome6 name="music" size={22} color={colors.baseContent} />
@@ -45,7 +44,6 @@ function AppNavigator() {
         name="PlaylistNavigator"
         component={PlaylistsNavigator}
         options={{
-          headerShown: false,
           tabBarLabel: "Playlists",
           tabBarIcon: () => {
             return (
