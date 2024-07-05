@@ -3,7 +3,7 @@ import type { Song } from "../constants/responses/song";
 
 export type SongsStackParamList = {
   Songs: undefined;
-  AddSongToPlaylist: Song;
+  AddSongToPlaylist: { song: Song };
 };
 
 export const SongsStack = createNativeStackNavigator<SongsStackParamList>();

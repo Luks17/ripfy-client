@@ -11,14 +11,20 @@ import { useGetPlaylistsQuery } from "../../../lib/hooks/queries/playlists/useGe
 import type { Playlist } from "../../../lib/constants/responses/playlist";
 import LoadingIndicator from "../../../components/feedback/LoadingIndicator";
 import PlaylistOption from "../../../components/core/PlaylistOption";
-import { useLayoutEffect, useState } from "react";
+import { useContext, useLayoutEffect, useState } from "react";
 import PrimaryButton from "../../../components/buttons/PrimaryBtn";
+import { useAddPlaylistSongQuery } from "../../../lib/hooks/queries/playlists/useAddPlaylistSongQuery";
+import { ToastContext } from "../../../store/toast-context";
 
 type Props = NativeStackScreenProps<SongsStackParamList, "AddSongToPlaylist">;
 
 function AddSongToPlaylistScreen({ navigation, route }: Props) {
   const [selectedPlaylists, setSelectedPlaylists] = useState<string[]>([]);
+
+  const { displayToast } = useContext(ToastContext);
+
   const { data, isPending } = useGetPlaylistsQuery();
+  const { mutateAsync } = useAddPlaylistSongQuery();
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -33,9 +39,32 @@ function AddSongToPlaylistScreen({ navigation, route }: Props) {
         </PrimaryButton>
       ),
     });
-  }, []);
+  }, [onSubmit]);
 
-  function onSubmit() { }
+  function onSubmit() {
+    const promises = [];
+
+    for (const playlist_id of selectedPlaylists) {
+      promises.push(mutateAsync({ playlist_id, song: route.params.song }));
+    }
+
+    Promise.all(promises)
+      .then(() => {
+        displayToast(
+          "success",
+          "Música(s) adicionada(s) com sucesso na playlist!"
+        );
+      })
+      .catch(() => {
+        displayToast(
+          "error",
+          "Houve um erro ao adicionar a(s) música(s) na playlist! Tente novamente mais tarde..."
+        );
+      })
+      .finally(() => {
+        navigation.navigate("Songs");
+      });
+  }
 
   function onSelectHandler(playlist_id: string, is_selected: boolean) {
     if (is_selected) {

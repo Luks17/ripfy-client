@@ -31,7 +31,7 @@ function TrackOptions({ showModal, closeModalHandler, targetTrack }: Props) {
 
   function openPlaylistSelectionScreen(track: Song) {
     closeModalHandler();
-    navigate("AddSongToPlaylist", track);
+    navigate("AddSongToPlaylist", { song: track });
   }
 
   function deleteTrackBtnPressHandler(track_id: string) {
