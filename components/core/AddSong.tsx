@@ -22,6 +22,7 @@ function AddSong() {
   const handleInputChange = (text: string) => setSongUrl(text);
 
   useMutationToasts(addSongMutation, "Música adicionada com sucesso!", () => {
+    setSongUrl("");
     hideModal();
   });
 
