@@ -20,6 +20,7 @@ type Props = NativeStackScreenProps<SongsStackParamList, "AddSongToPlaylist">;
 
 function AddSongToPlaylistScreen({ navigation, route }: Props) {
   const [selectedPlaylists, setSelectedPlaylists] = useState<string[]>([]);
+  const [areMutsPending, setAreMutsPending] = useState(false);
 
   const { displayToast } = useContext(ToastContext);
 
@@ -29,15 +30,18 @@ function AddSongToPlaylistScreen({ navigation, route }: Props) {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "Selecione Playlists",
-      headerRight: () => (
-        <PrimaryButton
-          onPress={onSubmit}
-          innerStyle={styles.innerBtnStyle}
-          textStyle={styles.btnTextStyle}
-        >
-          Adicionar
-        </PrimaryButton>
-      ),
+      headerRight: () =>
+        areMutsPending ? (
+          <LoadingIndicator occupyAll={false} />
+        ) : (
+          <PrimaryButton
+            onPress={onSubmit}
+            innerStyle={styles.innerBtnStyle}
+            textStyle={styles.btnTextStyle}
+          >
+            Adicionar
+          </PrimaryButton>
+        ),
     });
   }, [onSubmit]);
 
@@ -47,6 +51,8 @@ function AddSongToPlaylistScreen({ navigation, route }: Props) {
     for (const playlist_id of selectedPlaylists) {
       promises.push(mutateAsync({ playlist_id, song: route.params.song }));
     }
+
+    setAreMutsPending(true);
 
     Promise.all(promises)
       .then(() => {
