@@ -7,6 +7,7 @@ import {
   Text,
   View,
   type ViewStyle,
+  TextStyle,
 } from "react-native";
 import { colors } from "../../lib/constants/colors";
 
@@ -15,6 +16,7 @@ interface Props {
   onPress?: (e: GestureResponderEvent) => void;
   innerStyle?: StyleProp<ViewStyle>;
   outerStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
   ripple?: string;
 }
 
@@ -23,6 +25,7 @@ function PrimaryButton({
   onPress,
   innerStyle,
   outerStyle,
+  textStyle,
   ripple = colors.tertiary,
 }: Props) {
   return (
@@ -36,7 +39,7 @@ function PrimaryButton({
         android_ripple={{ color: ripple }}
         onPress={onPress}
       >
-        <Text style={styles.text}>{children}</Text>
+        <Text style={[styles.text, textStyle]}>{children}</Text>
       </Pressable>
     </View>
   );
