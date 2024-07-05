@@ -11,9 +11,9 @@ import {
 import LoadingIndicator from "../../../components/feedback/LoadingIndicator";
 import Track from "../../../components/core/Track";
 import SearchBar from "../../../components/core/SearchBar";
-import TrackOptions from "../../../components/core/TrackOptions";
 import { colors } from "../../../lib/constants/colors";
 import { useGetPlaylistSongsQuery } from "../../../lib/hooks/queries/playlists/useGetPlaylistSongsQuery";
+import PlaylistTrackOptions from "../../../components/core/PlaylistTrackOptions";
 
 type Props = NativeStackScreenProps<
   PlaylistStackParamList,
@@ -29,12 +29,12 @@ function VisualizePlaylistScreen({ navigation, route }: Props) {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: route.params.title,
+      title: route.params.playlist.title,
     });
   }, []);
 
   const { data, isPending } = useGetPlaylistSongsQuery(
-    route.params.id,
+    route.params.playlist.id,
     searchQuery
   );
 
@@ -69,10 +69,11 @@ function VisualizePlaylistScreen({ navigation, route }: Props) {
         keyExtractor={(item) => item.id}
         renderItem={renderTrack}
       />
-      <TrackOptions
+      <PlaylistTrackOptions
         showModal={isModalOpen}
         closeModalHandler={closeModal}
         targetTrack={longPressTargetTrack}
+        playlist={route.params.playlist}
       />
     </View>
   );

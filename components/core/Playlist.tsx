@@ -20,7 +20,7 @@ function Playlist({ playlist }: Props) {
   const { navigate } = useNavigation<PlaylistStackNavigationProps>();
 
   function pressHandler() {
-    navigate("VisualizePlaylist", playlist);
+    navigate("VisualizePlaylist", { playlist });
   }
 
   return (

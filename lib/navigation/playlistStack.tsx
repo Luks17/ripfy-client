@@ -3,7 +3,7 @@ import type { Playlist } from "../constants/responses/playlist";
 
 export type PlaylistStackParamList = {
   Playlists: undefined;
-  VisualizePlaylist: Playlist;
+  VisualizePlaylist: { playlist: Playlist };
 };
 
 export const PlaylistStack =
