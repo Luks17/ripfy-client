@@ -37,7 +37,7 @@ function Playlist({ playlist }: Props) {
         />
         <View style={styles.detailsContainer}>
           <Text style={styles.title}>{playlist.title}</Text>
-          <Text style={styles.desc}>{57} músicas</Text>
+          <Text style={styles.desc}>{playlist.songs_number} músicas</Text>
         </View>
         <View style={styles.iconContainer}>
           <IconBtn
