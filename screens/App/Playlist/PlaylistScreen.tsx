@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   playlistsContainer: {
     paddingVertical: 10,
-    alignSelf: "center",
+    paddingHorizontal: 20,
   },
 });
 

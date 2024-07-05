@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     elevation: 5,
     padding: 2,
     marginVertical: 5,
+    alignSelf: "center",
   },
   iconContainer: {
     padding: 5,
