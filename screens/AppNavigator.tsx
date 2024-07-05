@@ -1,14 +1,13 @@
 import { FontAwesome6, MaterialCommunityIcons } from "@expo/vector-icons";
 import { AppTabs } from "../lib/navigation/appTabs";
 import SongsScreen from "../screens/App/SongsScreen";
-import PlaylistScreen from "./App/PlaylistScreen";
 import AddSong from "../components/core/AddSong";
 import { useContext, useEffect } from "react";
 import { tryRefreshSession } from "../lib/network/session";
 import { AuthContext } from "../store/auth-context";
 import Config from "../lib/network/config";
 import { colors } from "../lib/constants/colors";
-import AddPlaylist from "../components/core/AddPlaylist";
+import PlaylistNavigator from "./App/PlaylistNavigator";
 
 function AppNavigator() {
   const { authenticate, clearSession } = useContext(AuthContext);
@@ -43,10 +42,11 @@ function AppNavigator() {
         }}
       />
       <AppTabs.Screen
-        name="Playlists"
-        component={PlaylistScreen}
+        name="PlaylistNavigator"
+        component={PlaylistNavigator}
         options={{
-          headerRight: () => <AddPlaylist />,
+          headerShown: false,
+          tabBarLabel: "Playlists",
           tabBarIcon: () => {
             return (
               <MaterialCommunityIcons

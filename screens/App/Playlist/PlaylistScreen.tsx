@@ -4,15 +4,15 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import { colors } from "../../lib/constants/colors";
-import SearchBar from "../../components/core/SearchBar";
-import PlaylistComponent from "../../components/core/Playlist";
-import { useGetPlaylistsQuery } from "../../lib/hooks/queries/playlists/useGetPlaylistsQuery";
-import LoadingIndicator from "../../components/feedback/LoadingIndicator";
-import type { Playlist } from "../../lib/constants/responses/playlist";
+import { colors } from "../../../lib/constants/colors";
+import SearchBar from "../../../components/core/SearchBar";
+import PlaylistComponent from "../../../components/core/Playlist";
+import { useGetPlaylistsQuery } from "../../../lib/hooks/queries/playlists/useGetPlaylistsQuery";
+import LoadingIndicator from "../../../components/feedback/LoadingIndicator";
+import type { Playlist } from "../../../lib/constants/responses/playlist";
 import { useCallback, useState } from "react";
 
-function PlaylistScreen() {
+function PlaylistsScreen() {
   const [searchQuery, setSearchQuery] = useState("");
   const { data, isPending } = useGetPlaylistsQuery();
 
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PlaylistScreen;
+export default PlaylistsScreen;
