@@ -16,7 +16,7 @@ import { validate } from "../../lib/validation/signup";
 import { hasError } from "../../lib/validation/common";
 import { useSignupQuery } from "../../lib/hooks/queries/auth/useSignupQuery";
 import { colors } from "../../lib/constants/colors";
-import { useResponsiveMutation } from "../../lib/hooks/mutations/useResponsiveMutation";
+import { useResponsiveMutation } from "../../lib/hooks/post-mutations/useResponsiveMutation";
 
 type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
 
