@@ -11,7 +11,7 @@ import LoadingIndicator from "../../../components/feedback/LoadingIndicator";
 import type { Song } from "../../../lib/constants/responses/song";
 import SearchBar from "../../../components/core/SearchBar";
 import { useCallback, useState } from "react";
-import TrackOptions from "../../../components/core/TrackOptions";
+import TrackOptions from "../../../components/options-menus/TrackOptions";
 
 function SongsScreen() {
   const [searchQuery, setSearchQuery] = useState("");

@@ -13,7 +13,7 @@ import Track from "../../../components/core/Track";
 import SearchBar from "../../../components/core/SearchBar";
 import { colors } from "../../../lib/constants/colors";
 import { useGetPlaylistSongsQuery } from "../../../lib/hooks/queries/playlists/useGetPlaylistSongsQuery";
-import PlaylistTrackOptions from "../../../components/core/PlaylistTrackOptions";
+import PlaylistTrackOptions from "../../../components/options-menus/PlaylistTrackOptions";
 
 type Props = NativeStackScreenProps<
   PlaylistStackParamList,

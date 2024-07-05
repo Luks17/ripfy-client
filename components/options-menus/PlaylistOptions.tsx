@@ -10,7 +10,7 @@ interface Props {
   onSelect: (playlist_id: string, is_selected: boolean) => void;
 }
 
-function PlaylistOption({ playlist, onSelect }: Props) {
+function PlaylistOptions({ playlist, onSelect }: Props) {
   const [isSelected, setIsSelected] = useState(false);
 
   function onPressHandler() {
@@ -78,4 +78,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PlaylistOption;
+export default PlaylistOptions;
