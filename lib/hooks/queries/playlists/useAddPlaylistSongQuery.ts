@@ -36,7 +36,7 @@ export const useAddPlaylistSongQuery = () => {
         return { playlist_id: data.playlist_id, song: data.song };
       }),
     onSuccess: ({ playlist_id, song }) => {
-      queryClient.setQueryData<Song[]>(["playlist", playlist_id], (old) =>
+      queryClient.setQueryData<Song[]>(["playlist", playlist_id, ""], (old) =>
         old !== undefined ? [...old, song] : [song]
       );
     },

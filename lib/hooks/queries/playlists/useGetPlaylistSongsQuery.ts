@@ -15,7 +15,7 @@ export const useGetPlaylistSongsQuery = (
   const queryParams = searchQuery ? `?search=${searchQuery}` : "";
 
   return useQuery({
-    queryKey: ["playlist", playlist_id],
+    queryKey: ["playlist", playlist_id, searchQuery],
     queryFn: () =>
       fetch(
         `${Config.apiEndpoint}/api/playlists/${playlist_id}/songs${queryParams}`,
