@@ -1,7 +1,6 @@
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import type { PlaylistStackParamList } from "../../../lib/navigation/playlistStack";
 import { useCallback, useLayoutEffect, useState } from "react";
-import { useGetSongsQuery } from "../../../lib/hooks/queries/songs/useGetSongsQuery";
 import type { Song } from "../../../lib/constants/responses/song";
 import {
   type ListRenderItemInfo,
@@ -14,6 +13,7 @@ import Track from "../../../components/core/Track";
 import SearchBar from "../../../components/core/SearchBar";
 import TrackOptions from "../../../components/core/TrackOptions";
 import { colors } from "../../../lib/constants/colors";
+import { useGetPlaylistSongsQuery } from "../../../lib/hooks/queries/playlists/useGetPlaylistSongsQuery";
 
 type Props = NativeStackScreenProps<
   PlaylistStackParamList,
@@ -28,10 +28,15 @@ function VisualizePlaylistScreen({ navigation, route }: Props) {
   );
 
   useLayoutEffect(() => {
-    navigation.setOptions({ title: route.params.title });
+    navigation.setOptions({
+      title: route.params.title,
+    });
   }, []);
 
-  const { data, isPending } = useGetSongsQuery(searchQuery);
+  const { data, isPending } = useGetPlaylistSongsQuery(
+    route.params.id,
+    searchQuery
+  );
 
   const searchUpdateHandler = useCallback((value: string) => {
     setSearchQuery(value);

@@ -16,10 +16,9 @@ function AddSong() {
   const addSongMutation = useAddSongQuery();
   const { mutate, isPending } = addSongMutation;
 
+  const handleInputChange = (text: string) => setSongUrl(text);
   const showModal = () => setIsModalVisible(true);
   const hideModal = () => setIsModalVisible(false);
-
-  const handleInputChange = (text: string) => setSongUrl(text);
 
   useMutationToasts(addSongMutation, "Música adicionada com sucesso!", () => {
     setSongUrl("");
