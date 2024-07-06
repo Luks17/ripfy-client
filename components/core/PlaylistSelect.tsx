@@ -10,7 +10,7 @@ interface Props {
   onSelect: (playlist_id: string, is_selected: boolean) => void;
 }
 
-function PlaylistOptions({ playlist, onSelect }: Props) {
+function PlaylistSelect({ playlist, onSelect }: Props) {
   const [isSelected, setIsSelected] = useState(false);
 
   function onPressHandler() {
@@ -32,7 +32,7 @@ function PlaylistOptions({ playlist, onSelect }: Props) {
         />
         <View style={styles.detailsContainer}>
           <Text style={styles.title}>{playlist.title}</Text>
-          <Text style={styles.desc}>{57} músicas</Text>
+          <Text style={styles.desc}>{playlist.songs_number} músicas</Text>
         </View>
         <View style={styles.selectorContainer}>
           <MaterialIcons
@@ -78,4 +78,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PlaylistOptions;
+export default PlaylistSelect;

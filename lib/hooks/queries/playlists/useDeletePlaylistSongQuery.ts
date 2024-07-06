@@ -5,6 +5,7 @@ import type { ApiResponse } from "../../../constants/response";
 import { useContext } from "react";
 import { AuthContext } from "../../../../store/auth-context";
 import type { Song } from "../../../constants/responses/song";
+import type { Playlist } from "../../../constants/responses/playlist";
 
 type ExpectedData = {
   playlist_id: string;
@@ -34,6 +35,14 @@ export const useDeletePlaylistSongQuery = () => {
         return { playlist_id: data.playlist_id, song: data.song };
       }),
     onSuccess: ({ playlist_id, song }) => {
+      queryClient.setQueryData<Playlist[]>(["playlists", ""], (old) =>
+        old?.map((playlist) => {
+          if (playlist.id === playlist_id)
+            return { ...playlist, songs_number: playlist.songs_number - 1 };
+
+          return playlist;
+        })
+      );
       queryClient.setQueryData<Song[]>(["playlist", playlist_id, ""], (old) =>
         old !== undefined ? old.filter(({ id }) => id !== song.id) : []
       );

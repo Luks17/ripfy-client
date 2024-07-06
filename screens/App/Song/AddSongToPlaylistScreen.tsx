@@ -10,7 +10,7 @@ import { colors } from "../../../lib/constants/colors";
 import { useGetPlaylistsQuery } from "../../../lib/hooks/queries/playlists/useGetPlaylistsQuery";
 import type { Playlist } from "../../../lib/constants/responses/playlist";
 import LoadingIndicator from "../../../components/feedback/LoadingIndicator";
-import PlaylistOptions from "../../../components/options-menus/PlaylistOptions";
+import PlaylistSelect from "../../../components/core/PlaylistSelect";
 import { useContext, useLayoutEffect, useState } from "react";
 import PrimaryButton from "../../../components/buttons/PrimaryBtn";
 import { useAddPlaylistSongQuery } from "../../../lib/hooks/queries/playlists/useAddPlaylistSongQuery";
@@ -24,7 +24,7 @@ function AddSongToPlaylistScreen({ navigation, route }: Props) {
 
   const { displayToast } = useContext(ToastContext);
 
-  const { data, isPending } = useGetPlaylistsQuery();
+  const { data, isPending } = useGetPlaylistsQuery("");
   const { mutateAsync } = useAddPlaylistSongQuery();
 
   useLayoutEffect(() => {
@@ -82,7 +82,7 @@ function AddSongToPlaylistScreen({ navigation, route }: Props) {
 
   function renderPlaylistOption({ item }: ListRenderItemInfo<Playlist>) {
     if (isPending) return <LoadingIndicator />;
-    return <PlaylistOptions playlist={item} onSelect={onSelectHandler} />;
+    return <PlaylistSelect playlist={item} onSelect={onSelectHandler} />;
   }
 
   return (
