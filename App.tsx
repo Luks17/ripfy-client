@@ -2,13 +2,17 @@ import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import AppNavigator from "./screens/AppNavigator";
 import { AuthContext } from "./store/auth-context";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import RootNavigator from "./screens/RootNavigator";
 import { tryRefreshSession } from "./lib/network/session";
 import ProvidersTree from "./components/ProvidersTree";
+import { setupTrackPlayer } from "./lib/track-player/setup";
+import TrackPlayer from "react-native-track-player";
+import { playbackService } from "./lib/track-player/playbackService";
 
 SplashScreen.preventAutoHideAsync();
+TrackPlayer.registerPlaybackService(() => playbackService);
 
 function Navigation() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -21,10 +25,13 @@ function AppSetup() {
   const [isAppReady, setIsAppReady] = useState(false);
   const { authenticate, clearSession } = useContext(AuthContext);
 
+  const setup = useCallback(async () => {
+    await tryRefreshSession(authenticate, clearSession);
+    await setupTrackPlayer();
+  }, []);
+
   useEffect(() => {
-    tryRefreshSession(authenticate, clearSession).then(() =>
-      setIsAppReady(true)
-    );
+    setup().then(() => setIsAppReady(true));
   }, []);
 
   useEffect(() => {
