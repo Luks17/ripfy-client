@@ -12,6 +12,7 @@ import type { Song } from "../../../lib/constants/responses/song";
 import SearchBar from "../../../components/core/SearchBar";
 import { useCallback, useState } from "react";
 import TrackOptions from "../../../components/options-menus/TrackOptions";
+import { loadAndPlay } from "../../../lib/track-player/controls";
 
 function SongsScreen() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -32,7 +33,9 @@ function SongsScreen() {
   };
   const closeModal = () => setIsModalOpen(false);
 
-  function handleTrackPress(song: Song) {}
+  async function handleTrackPress(song: Song) {
+    await loadAndPlay(song);
+  }
 
   function renderTrack({ item }: ListRenderItemInfo<Song>) {
     if (isPending) return <LoadingIndicator />;
