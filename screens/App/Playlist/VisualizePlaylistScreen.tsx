@@ -49,7 +49,6 @@ function VisualizePlaylistScreen({ navigation, route }: Props) {
   const closeModal = () => setIsModalOpen(false);
 
   function renderTrack({ item }: ListRenderItemInfo<Song>) {
-    if (isPending) return <LoadingIndicator />;
     return <Track song={item} longPressHandler={openModal} />;
   }
 
@@ -64,6 +63,7 @@ function VisualizePlaylistScreen({ navigation, route }: Props) {
             onChange={searchUpdateHandler}
           />
         }
+        ListEmptyComponent={isPending ? <LoadingIndicator /> : null}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.songsContainer}
         keyExtractor={(item) => item.id}

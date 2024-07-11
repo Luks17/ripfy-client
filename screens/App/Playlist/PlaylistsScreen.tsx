@@ -22,7 +22,6 @@ function PlaylistsScreen() {
   }, []);
 
   function renderPlaylist({ item }: ListRenderItemInfo<Playlist>) {
-    if (isPending) return <LoadingIndicator />;
     return <PlaylistComponent playlist={item} />;
   }
 
@@ -35,6 +34,7 @@ function PlaylistsScreen() {
             onChange={searchUpdateHandler}
           />
         }
+        ListEmptyComponent={isPending ? <LoadingIndicator /> : null}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.playlistsContainer}
         data={data}

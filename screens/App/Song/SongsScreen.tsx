@@ -38,7 +38,6 @@ function SongsScreen() {
   }
 
   function renderTrack({ item }: ListRenderItemInfo<Song>) {
-    if (isPending) return <LoadingIndicator />;
     return (
       <Track
         song={item}
@@ -59,6 +58,7 @@ function SongsScreen() {
             onChange={searchUpdateHandler}
           />
         }
+        ListEmptyComponent={isPending ? <LoadingIndicator /> : null}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.songsContainer}
         keyExtractor={(item) => item.id}
