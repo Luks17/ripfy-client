@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import MiddleOverlayModal from "../modals/MiddleOverlayModal";
 import { colors } from "../../lib/constants/colors";
 import type { Song } from "../../lib/constants/responses/song";
@@ -6,6 +6,7 @@ import MenuBtn from "../buttons/MenuBtn";
 import { useEffect } from "react";
 import { useDeletePlaylistSongQuery } from "../../lib/hooks/queries/playlists/useDeletePlaylistSongQuery";
 import type { Playlist } from "../../lib/constants/responses/playlist";
+import { Image } from "expo-image";
 
 interface Props {
   showModal: boolean;
@@ -40,7 +41,6 @@ function PlaylistTrackOptions({
       <View style={styles.trackContainer}>
         <Image
           source={require("../../assets/unknown_artist.png")}
-          resizeMode="contain"
           style={styles.imageContainer}
         />
         <Text style={styles.title}>{targetTrack.title}</Text>

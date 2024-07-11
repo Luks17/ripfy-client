@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import MiddleOverlayModal from "../modals/MiddleOverlayModal";
 import { colors } from "../../lib/constants/colors";
 import type { Song } from "../../lib/constants/responses/song";
@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import type { SongsStackParamList } from "../../lib/navigation/songsStack";
+import { Image } from "expo-image";
 
 interface Props {
   showModal: boolean;
@@ -48,7 +49,6 @@ function TrackOptions({ showModal, closeModalHandler, targetTrack }: Props) {
       <View style={styles.trackContainer}>
         <Image
           source={require("../../assets/unknown_artist.png")}
-          resizeMode="contain"
           style={styles.imageContainer}
         />
         <Text style={styles.title}>{targetTrack.title}</Text>

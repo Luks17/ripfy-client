@@ -1,7 +1,8 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useActiveTrack } from "react-native-track-player";
 import PlayerControls from "./PlayerControls";
 import { colors } from "../../lib/constants/colors";
+import { Image } from "expo-image";
 
 function MiniPlayer() {
   const activeTrack = useActiveTrack();
