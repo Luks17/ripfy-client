@@ -6,7 +6,7 @@ import { getSongThumbnailUri } from "../../lib/network/util";
 
 interface Props {
   song: Song;
-  pressHandler?: (songId: string) => void;
+  pressHandler?: (song: Song) => void;
   longPressHandler?: (song: Song) => void;
 }
 
@@ -15,7 +15,7 @@ function Track({ song, pressHandler, longPressHandler }: Props) {
     <View>
       <Pressable
         style={styles.container}
-        onPress={pressHandler?.bind(null, song.id)}
+        onPress={pressHandler?.bind(null, song)}
         onLongPress={longPressHandler?.bind(null, song)}
         android_ripple={{ color: colors.base100 }}
       >

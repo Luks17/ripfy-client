@@ -8,6 +8,7 @@ import { colors } from "../lib/constants/colors";
 import PlaylistsNavigator from "./App/PlaylistNavigator";
 import SongsNavigator from "./App/SongsNavigator";
 import { addOpacity } from "../lib/ui/utils";
+import MiniPlayer from "../components/core/MiniPlayer";
 
 function AppNavigator() {
   const { authenticate, clearSession } = useContext(AuthContext);
@@ -21,50 +22,53 @@ function AppNavigator() {
   }, [authenticate, clearSession]);
 
   return (
-    <AppTabs.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarStyle: {
-          backgroundColor: colors.base100,
-          borderTopWidth: 0,
-          height: 54,
-        },
-        tabBarLabelStyle: {
-          fontSize: 12,
-        },
-        tabBarInactiveTintColor: addOpacity(colors.secondaryContent, "99"),
-        tabBarActiveTintColor: colors.secondary,
-      }}
-    >
-      <AppTabs.Screen
-        name="SongsNavigator"
-        component={SongsNavigator}
-        options={{
-          tabBarLabel: "Songs",
-          tabBarIcon: ({ color }) => {
-            return (
-              <MaterialCommunityIcons
-                name="music-circle"
-                size={25}
-                color={color}
-              />
-            );
+    <>
+      <AppTabs.Navigator
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: {
+            backgroundColor: colors.base100,
+            borderTopWidth: 0,
+            height: 54,
           },
-        }}
-      />
-      <AppTabs.Screen
-        name="PlaylistNavigator"
-        component={PlaylistsNavigator}
-        options={{
-          tabBarLabel: "Playlists",
-          tabBarIcon: ({ color }) => {
-            return (
-              <MaterialIcons name="library-music" size={25} color={color} />
-            );
+          tabBarLabelStyle: {
+            fontSize: 12,
           },
+          tabBarInactiveTintColor: addOpacity(colors.secondaryContent, "99"),
+          tabBarActiveTintColor: colors.secondary,
         }}
-      />
-    </AppTabs.Navigator>
+      >
+        <AppTabs.Screen
+          name="SongsNavigator"
+          component={SongsNavigator}
+          options={{
+            tabBarLabel: "Songs",
+            tabBarIcon: ({ color }) => {
+              return (
+                <MaterialCommunityIcons
+                  name="music-circle"
+                  size={25}
+                  color={color}
+                />
+              );
+            },
+          }}
+        />
+        <AppTabs.Screen
+          name="PlaylistNavigator"
+          component={PlaylistsNavigator}
+          options={{
+            tabBarLabel: "Playlists",
+            tabBarIcon: ({ color }) => {
+              return (
+                <MaterialIcons name="library-music" size={25} color={color} />
+              );
+            },
+          }}
+        />
+      </AppTabs.Navigator>
+      <MiniPlayer />
+    </>
   );
 }
 
