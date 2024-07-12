@@ -1,9 +1,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-export type appTabsParamList = {
+export type AppTabsParamList = {
   SongsNavigator: undefined;
   PlaylistNavigator: undefined;
   UserData: undefined;
 };
 
-export const AppTabs = createBottomTabNavigator<appTabsParamList>();
+export const AppTabs = createBottomTabNavigator<AppTabsParamList>();

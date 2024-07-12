@@ -4,6 +4,7 @@ import { AuthContext } from "../store/auth-context";
 import Config from "../lib/network/config";
 import { SignedInStack } from "../lib/navigation/signedInStack";
 import AppTabsNavigator from "./SignedIn/AppTabsNavigator";
+import AppTrackPlayerScreen from "./SignedIn/AppTrackPlayerScreen";
 
 function SignedInNavigator() {
   const { authenticate, clearSession } = useContext(AuthContext);
@@ -19,6 +20,16 @@ function SignedInNavigator() {
   return (
     <SignedInStack.Navigator screenOptions={{ headerShown: false }}>
       <SignedInStack.Screen name="AppTabs" component={AppTabsNavigator} />
+      <SignedInStack.Screen
+        name="AppTrackPlayer"
+        options={{
+          presentation: "card",
+          gestureEnabled: true,
+          gestureDirection: "vertical",
+          animationDuration: 400,
+        }}
+        component={AppTrackPlayerScreen}
+      />
     </SignedInStack.Navigator>
   );
 }

@@ -5,14 +5,31 @@ import { colors } from "../../lib/constants/colors";
 import { Image } from "expo-image";
 import MovingText from "../animated/MovingText";
 import { addOpacity } from "../../lib/ui/utils";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { SignedInStackParamList } from "../../lib/navigation/signedInStack";
+
+type SignedInNavigationProps = NativeStackNavigationProp<
+  SignedInStackParamList,
+  "AppTabs"
+>;
 
 function MiniPlayer() {
+  const { navigate } = useNavigation<SignedInNavigationProps>();
   const activeTrack = useActiveTrack();
 
   if (!activeTrack) return null;
 
+  function pressHandler() {
+    navigate("AppTrackPlayer");
+  }
+
   return (
-    <TouchableOpacity activeOpacity={0.9} style={styles.container}>
+    <TouchableOpacity
+      onPress={pressHandler}
+      activeOpacity={0.9}
+      style={styles.container}
+    >
       <>
         <Image source={{ uri: activeTrack.artwork }} style={styles.image} />
         <View style={styles.trackContainer}>
