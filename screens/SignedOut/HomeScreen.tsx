@@ -1,8 +1,9 @@
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import type { SignedOutStackParamList } from "../../lib/navigation/signedOutStack";
 import PrimaryButton from "../../components/buttons/PrimaryBtn";
 import { colors } from "../../lib/constants/colors";
+import { Image } from "expo-image";
 
 type Props = NativeStackScreenProps<SignedOutStackParamList, "Home">;
 
@@ -10,7 +11,10 @@ function HomeScreen({ navigation }: Props) {
   return (
     <View style={styles.rootContainer}>
       <View style={styles.titleContainer}>
-        <Text style={styles.mainTitle}>Ripfy</Text>
+        <Image
+          source={require("../../assets/arte-ripfy.png")}
+          style={{ width: 300, height: 300 }}
+        />
       </View>
       <View style={styles.buttonsContainer}>
         <PrimaryButton
