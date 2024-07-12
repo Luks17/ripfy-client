@@ -5,16 +5,16 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import type { SongsStackParamList } from "../../../lib/navigation/songsStack";
-import { colors } from "../../../lib/constants/colors";
-import { useGetPlaylistsQuery } from "../../../lib/hooks/queries/playlists/useGetPlaylistsQuery";
-import type { Playlist } from "../../../lib/constants/responses/playlist";
-import LoadingIndicator from "../../../components/feedback/LoadingIndicator";
-import PlaylistSelect from "../../../components/core/PlaylistSelect";
+import type { SongsStackParamList } from "../../../../lib/navigation/songsStack";
+import { colors } from "../../../../lib/constants/colors";
+import { useGetPlaylistsQuery } from "../../../../lib/hooks/queries/playlists/useGetPlaylistsQuery";
+import type { Playlist } from "../../../../lib/constants/responses/playlist";
+import LoadingIndicator from "../../../../components/feedback/LoadingIndicator";
+import PlaylistSelect from "../../../../components/core/PlaylistSelect";
 import { useContext, useLayoutEffect, useState } from "react";
-import PrimaryButton from "../../../components/buttons/PrimaryBtn";
-import { useAddPlaylistSongQuery } from "../../../lib/hooks/queries/playlists/useAddPlaylistSongQuery";
-import { ToastContext } from "../../../store/toast-context";
+import PrimaryButton from "../../../../components/buttons/PrimaryBtn";
+import { useAddPlaylistSongQuery } from "../../../../lib/hooks/queries/playlists/useAddPlaylistSongQuery";
+import { ToastContext } from "../../../../store/toast-context";
 
 type Props = NativeStackScreenProps<SongsStackParamList, "AddSongToPlaylist">;
 

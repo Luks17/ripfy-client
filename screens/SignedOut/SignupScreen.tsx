@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from "react-native";
-import type { RootStackParamList } from "../../lib/navigation/root";
+import type { SignedOutStackParamList } from "../../lib/navigation/signedOutStack";
 import { useEffect, useState } from "react";
 
 import PrimaryButton from "../../components/buttons/PrimaryBtn";
@@ -18,7 +18,7 @@ import { useSignupQuery } from "../../lib/hooks/queries/auth/useSignupQuery";
 import { colors } from "../../lib/constants/colors";
 import { useResponsiveMutation } from "../../lib/hooks/post-mutations/useResponsiveMutation";
 
-type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
+type Props = NativeStackScreenProps<SignedOutStackParamList, "SignUp">;
 
 function SignupScreen({ navigation }: Props) {
   const [userName, setUserName] = useState("");

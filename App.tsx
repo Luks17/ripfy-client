@@ -1,10 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import AppNavigator from "./screens/AppNavigator";
+import SignedInNavigator from "./screens/SignedInNavigator";
 import { AuthContext } from "./store/auth-context";
 import { useCallback, useContext, useEffect, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
-import RootNavigator from "./screens/RootNavigator";
+import SignedOutNavigator from "./screens/SignedOutNavigator";
 import { tryRefreshSession } from "./lib/network/session";
 import ProvidersTree from "./components/ProvidersTree";
 import { setupTrackPlayer } from "./lib/track-player/setup";
@@ -17,8 +17,8 @@ TrackPlayer.registerPlaybackService(() => playbackService);
 function Navigation() {
   const { isLoggedIn } = useContext(AuthContext);
 
-  if (isLoggedIn) return <AppNavigator />;
-  else return <RootNavigator />;
+  if (isLoggedIn) return <SignedInNavigator />;
+  else return <SignedOutNavigator />;
 }
 
 function AppSetup() {

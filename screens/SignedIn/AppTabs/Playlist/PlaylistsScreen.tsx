@@ -4,12 +4,12 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import { colors } from "../../../lib/constants/colors";
-import SearchBar from "../../../components/core/SearchBar";
-import PlaylistComponent from "../../../components/core/Playlist";
-import { useGetPlaylistsQuery } from "../../../lib/hooks/queries/playlists/useGetPlaylistsQuery";
-import LoadingIndicator from "../../../components/feedback/LoadingIndicator";
-import type { Playlist } from "../../../lib/constants/responses/playlist";
+import { colors } from "../../../../lib/constants/colors";
+import SearchBar from "../../../../components/core/SearchBar";
+import PlaylistComponent from "../../../../components/core/Playlist";
+import { useGetPlaylistsQuery } from "../../../../lib/hooks/queries/playlists/useGetPlaylistsQuery";
+import LoadingIndicator from "../../../../components/feedback/LoadingIndicator";
+import type { Playlist } from "../../../../lib/constants/responses/playlist";
 import { useCallback, useState } from "react";
 
 function PlaylistsScreen() {

@@ -1,26 +1,12 @@
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
-import { AppTabs } from "../lib/navigation/appTabs";
-import { useContext, useEffect } from "react";
-import { tryRefreshSession } from "../lib/network/session";
-import { AuthContext } from "../store/auth-context";
-import Config from "../lib/network/config";
-import { colors } from "../lib/constants/colors";
-import PlaylistsNavigator from "./App/PlaylistNavigator";
-import SongsNavigator from "./App/SongsNavigator";
-import { addOpacity } from "../lib/ui/utils";
-import MiniPlayer from "../components/core/MiniPlayer";
+import { AppTabs } from "../../lib/navigation/appTabs";
+import { colors } from "../../lib/constants/colors";
+import PlaylistsNavigator from "./AppTabs/PlaylistNavigator";
+import SongsNavigator from "./AppTabs/SongsNavigator";
+import { addOpacity } from "../../lib/ui/utils";
+import MiniPlayer from "../../components/core/MiniPlayer";
 
-function AppNavigator() {
-  const { authenticate, clearSession } = useContext(AuthContext);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      tryRefreshSession(authenticate, clearSession);
-    }, 1000 * Config.apiTokenExpirationTime);
-
-    return () => clearInterval(timer);
-  }, [authenticate, clearSession]);
-
+function AppTabsNavigator() {
   return (
     <>
       <AppTabs.Navigator
@@ -72,4 +58,4 @@ function AppNavigator() {
   );
 }
 
-export default AppNavigator;
+export default AppTabsNavigator;

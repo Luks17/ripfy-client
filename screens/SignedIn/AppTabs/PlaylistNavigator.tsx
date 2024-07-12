@@ -1,6 +1,6 @@
-import AddPlaylist from "../../components/core/AddPlaylist";
-import { colors } from "../../lib/constants/colors";
-import { PlaylistStack } from "../../lib/navigation/playlistStack";
+import AddPlaylist from "../../../components/core/AddPlaylist";
+import { colors } from "../../../lib/constants/colors";
+import { PlaylistStack } from "../../../lib/navigation/playlistStack";
 import PlaylistsScreen from "./Playlist/PlaylistsScreen";
 import VisualizePlaylistScreen from "./Playlist/VisualizePlaylistScreen";
 
