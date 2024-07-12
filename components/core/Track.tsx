@@ -1,11 +1,13 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import type { Song } from "../../lib/constants/responses/song";
 import { colors } from "../../lib/constants/colors";
 import { addOpacity } from "../../lib/ui/utils";
+import { getSongThumbnailUri } from "../../lib/network/util";
+import { Image } from "expo-image";
 
 interface Props {
   song: Song;
-  pressHandler?: (songId: string) => void;
+  pressHandler?: (song: Song) => void;
   longPressHandler?: (song: Song) => void;
 }
 
@@ -14,13 +16,12 @@ function Track({ song, pressHandler, longPressHandler }: Props) {
     <View>
       <Pressable
         style={styles.container}
-        onPress={pressHandler?.bind(null, song.id)}
+        onPress={pressHandler?.bind(null, song)}
         onLongPress={longPressHandler?.bind(null, song)}
         android_ripple={{ color: colors.base100 }}
       >
         <Image
-          source={require("../../assets/unknown_artist.png")}
-          resizeMode="contain"
+          source={{ uri: getSongThumbnailUri(song) }}
           style={styles.imageContainer}
         />
         <View style={styles.textContainer}>

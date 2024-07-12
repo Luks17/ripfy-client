@@ -2,7 +2,7 @@ import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StyleSheet, Text, View } from "react-native";
 import { useContext, useEffect, useState } from "react";
 
-import type { RootStackParamList } from "../../lib/navigation/root";
+import type { SignedOutStackParamList } from "../../lib/navigation/signedOutStack";
 import PrimaryButton from "../../components/buttons/PrimaryBtn";
 import InputField from "../../components/forms/InputField";
 import { validate } from "../../lib/validation/login";
@@ -12,7 +12,7 @@ import { AuthContext } from "../../store/auth-context";
 import { colors } from "../../lib/constants/colors";
 import { useResponsiveMutation } from "../../lib/hooks/post-mutations/useResponsiveMutation";
 
-type Props = NativeStackScreenProps<RootStackParamList, "Login">;
+type Props = NativeStackScreenProps<SignedOutStackParamList, "Login">;
 
 function LoginScreen({ navigation }: Props) {
   const [userName, setUserName] = useState("");

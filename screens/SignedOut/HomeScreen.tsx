@@ -1,10 +1,10 @@
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StyleSheet, Text, View } from "react-native";
-import type { RootStackParamList } from "../../lib/navigation/root";
+import type { SignedOutStackParamList } from "../../lib/navigation/signedOutStack";
 import PrimaryButton from "../../components/buttons/PrimaryBtn";
 import { colors } from "../../lib/constants/colors";
 
-type Props = NativeStackScreenProps<RootStackParamList, "Home">;
+type Props = NativeStackScreenProps<SignedOutStackParamList, "Home">;
 
 function HomeScreen({ navigation }: Props) {
   return (

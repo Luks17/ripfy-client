@@ -7,7 +7,7 @@ import {
   Text,
   View,
   type ViewStyle,
-  TextStyle,
+  type TextStyle,
 } from "react-native";
 import { colors } from "../../lib/constants/colors";
 

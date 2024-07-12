@@ -1,9 +1,10 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { colors } from "../../lib/constants/colors";
 import { addOpacity } from "../../lib/ui/utils";
 import type { Playlist } from "../../lib/constants/responses/playlist";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
+import { Image } from "expo-image";
 
 interface Props {
   playlist: Playlist;
@@ -27,7 +28,6 @@ function PlaylistSelect({ playlist, onSelect }: Props) {
       >
         <Image
           source={require("../../assets/unknown_artist.png")}
-          resizeMode="contain"
           style={styles.imageContainer}
         />
         <View style={styles.detailsContainer}>
