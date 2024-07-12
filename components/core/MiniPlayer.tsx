@@ -1,8 +1,10 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useActiveTrack } from "react-native-track-player";
 import PlayerControls from "./PlayerControls";
 import { colors } from "../../lib/constants/colors";
 import { Image } from "expo-image";
+import MovingText from "../animated/MovingText";
+import { addOpacity } from "../../lib/ui/utils";
 
 function MiniPlayer() {
   const activeTrack = useActiveTrack();
@@ -14,7 +16,11 @@ function MiniPlayer() {
       <>
         <Image source={{ uri: activeTrack.artwork }} style={styles.image} />
         <View style={styles.trackContainer}>
-          <Text style={styles.trackTitle}>{activeTrack.title}</Text>
+          <MovingText
+            text={activeTrack.title!}
+            textLengthThreshold={30}
+            style={styles.trackTitle}
+          />
         </View>
         <View style={styles.trackControlsContainer}>
           <PlayerControls.PausePlayBtn />
@@ -33,32 +39,29 @@ const styles = StyleSheet.create({
     bottom: 60,
     backgroundColor: colors.base100,
     flexDirection: "row",
+    columnGap: 10,
     alignItems: "center",
-    borderRadius: 12,
-    padding: 10,
+    borderRadius: 8,
+    padding: 7,
   },
   image: {
-    width: 40,
-    height: 40,
-    borderRadius: 8,
+    width: 45,
+    height: 45,
   },
   trackContainer: {
     flex: 1,
     overflow: "hidden",
-    marginLeft: 10,
   },
   trackTitle: {
     fontSize: 18,
     fontWeight: "600",
-    paddingLeft: 10,
-    color: colors.baseContent,
+    color: addOpacity(colors.baseContent, "dd"),
   },
   trackControlsContainer: {
     flexDirection: "row",
     alignItems: "center",
     columnGap: 20,
-    marginRight: 16,
-    paddingLeft: 16,
+    paddingHorizontal: 10,
   },
 });
 
