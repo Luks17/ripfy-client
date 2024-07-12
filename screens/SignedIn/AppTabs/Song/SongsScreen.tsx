@@ -1,42 +1,27 @@
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import type { PlaylistStackParamList } from "../../../lib/navigation/playlistStack";
-import { useCallback, useLayoutEffect, useState } from "react";
-import type { Song } from "../../../lib/constants/responses/song";
 import {
-  type ListRenderItemInfo,
   FlatList,
+  type ListRenderItemInfo,
   StyleSheet,
   View,
 } from "react-native";
-import LoadingIndicator from "../../../components/feedback/LoadingIndicator";
-import Track from "../../../components/core/Track";
-import SearchBar from "../../../components/core/SearchBar";
-import { colors } from "../../../lib/constants/colors";
-import { useGetPlaylistSongsQuery } from "../../../lib/hooks/queries/playlists/useGetPlaylistSongsQuery";
-import PlaylistTrackOptions from "../../../components/options-menus/PlaylistTrackOptions";
+import { colors } from "../../../../lib/constants/colors";
+import Track from "../../../../components/core/Track";
+import { useGetSongsQuery } from "../../../../lib/hooks/queries/songs/useGetSongsQuery";
+import LoadingIndicator from "../../../../components/feedback/LoadingIndicator";
+import type { Song } from "../../../../lib/constants/responses/song";
+import SearchBar from "../../../../components/core/SearchBar";
+import { useCallback, useState } from "react";
+import TrackOptions from "../../../../components/options-menus/TrackOptions";
+import { loadAndPlay } from "../../../../lib/track-player/controls";
 
-type Props = NativeStackScreenProps<
-  PlaylistStackParamList,
-  "VisualizePlaylist"
->;
-
-function VisualizePlaylistScreen({ navigation, route }: Props) {
+function SongsScreen() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [longPressTargetTrack, setLongPressTargetTrack] = useState<null | Song>(
     null
   );
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: route.params.playlist.title,
-    });
-  }, []);
-
-  const { data, isPending } = useGetPlaylistSongsQuery(
-    route.params.playlist.id,
-    searchQuery
-  );
+  const { data, isPending } = useGetSongsQuery(searchQuery);
 
   const searchUpdateHandler = useCallback((value: string) => {
     setSearchQuery(value);
@@ -48,9 +33,18 @@ function VisualizePlaylistScreen({ navigation, route }: Props) {
   };
   const closeModal = () => setIsModalOpen(false);
 
+  async function handleTrackPress(song: Song) {
+    await loadAndPlay(song);
+  }
+
   function renderTrack({ item }: ListRenderItemInfo<Song>) {
-    if (isPending) return <LoadingIndicator />;
-    return <Track song={item} longPressHandler={openModal} />;
+    return (
+      <Track
+        song={item}
+        pressHandler={handleTrackPress}
+        longPressHandler={openModal}
+      />
+    );
   }
 
   return (
@@ -64,16 +58,16 @@ function VisualizePlaylistScreen({ navigation, route }: Props) {
             onChange={searchUpdateHandler}
           />
         }
+        ListEmptyComponent={isPending ? <LoadingIndicator /> : null}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.songsContainer}
         keyExtractor={(item) => item.id}
         renderItem={renderTrack}
       />
-      <PlaylistTrackOptions
+      <TrackOptions
         showModal={isModalOpen}
         closeModalHandler={closeModal}
         targetTrack={longPressTargetTrack}
-        playlist={route.params.playlist}
       />
     </View>
   );
@@ -90,4 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VisualizePlaylistScreen;
+export default SongsScreen;

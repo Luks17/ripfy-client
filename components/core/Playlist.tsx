@@ -1,4 +1,4 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { colors } from "../../lib/constants/colors";
 import IconBtn from "../buttons/IconBtn";
 import { addOpacity } from "../../lib/ui/utils";
@@ -7,6 +7,7 @@ import type { Playlist as PlaylistType } from "../../lib/constants/responses/pla
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import type { PlaylistStackParamList } from "../../lib/navigation/playlistStack";
 import PlaylistOptions from "../options-menus/PlaylistOptions";
+import { Image } from "expo-image";
 
 interface Props {
   playlist: PlaylistType;
@@ -33,7 +34,6 @@ function Playlist({ playlist }: Props) {
       >
         <Image
           source={require("../../assets/unknown_artist.png")}
-          resizeMode="contain"
           style={styles.imageContainer}
         />
         <View style={styles.detailsContainer}>
