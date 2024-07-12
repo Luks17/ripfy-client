@@ -58,6 +58,9 @@ function AppTrackPlayerScreen() {
           />
         </PlayerControls.PausePlayPressable>
       </View>
+      <View style={styles.slider}>
+        <PlayerControls.ProgressSlider />
+      </View>
     </View>
   );
 }
@@ -112,6 +115,9 @@ const styles = StyleSheet.create({
     borderRadius: 999,
     backgroundColor: "#000",
     padding: 12,
+  },
+  slider: {
+    padding: 10,
   },
 });
 

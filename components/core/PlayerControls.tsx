@@ -1,11 +1,31 @@
-import TrackPlayer, { useIsPlaying } from "react-native-track-player";
+import TrackPlayer, {
+  useIsPlaying,
+  useProgress,
+} from "react-native-track-player";
 import IconBtn from "../buttons/IconBtn";
 import { colors } from "../../lib/constants/colors";
-import { Pressable, type StyleProp, type ViewStyle } from "react-native";
-import type { ReactNode } from "react";
+import {
+  Pressable,
+  type ViewProps,
+  type StyleProp,
+  type ViewStyle,
+  View,
+  Text,
+  StyleSheet,
+} from "react-native";
+import { useState, type ReactNode } from "react";
+import Slider from "@react-native-community/slider";
+import { addOpacity } from "../../lib/ui/utils";
 
 interface Props {
   size?: number;
+}
+
+function getFormattedTime(timeInSecs: number) {
+  const minutes = Math.floor(timeInSecs / 60);
+  const seconds = Math.floor(timeInSecs) - minutes * 60;
+
+  return `${minutes}:${seconds}`;
 }
 
 function PausePlayPressable({
@@ -80,9 +100,50 @@ function SkipToPreviousBtn({ size = 22 }: Props) {
   );
 }
 
+function ProgressSlider({ style }: ViewProps) {
+  const [seekedValue, setSeekedValue] = useState(0);
+  const { duration, position } = useProgress();
+
+  function handleChange(value: number) {
+    setSeekedValue(value);
+  }
+
+  function handleSlidingComplete() {
+    TrackPlayer.seekTo(seekedValue);
+  }
+
+  return (
+    <View style={style}>
+      <Slider
+        minimumValue={0}
+        maximumValue={duration}
+        value={position}
+        onValueChange={handleChange}
+        onSlidingComplete={handleSlidingComplete}
+        minimumTrackTintColor={colors.accent}
+        maximumTrackTintColor="#fff"
+        thumbTintColor={colors.accent}
+      />
+      <View style={sliderStyles.times}>
+        <Text style={sliderStyles.text}>{getFormattedTime(position)}</Text>
+        <Text style={sliderStyles.text}>{getFormattedTime(duration)}</Text>
+      </View>
+    </View>
+  );
+}
+
+const sliderStyles = StyleSheet.create({
+  times: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  text: { color: addOpacity(colors.baseContent, "aa") },
+});
+
 export default {
   PausePlayBtn,
   SkipToNextBtn,
   SkipToPreviousBtn,
   PausePlayPressable,
+  ProgressSlider,
 };
