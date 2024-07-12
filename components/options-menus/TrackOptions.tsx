@@ -9,6 +9,7 @@ import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import type { SongsStackParamList } from "../../lib/navigation/songsStack";
 import { Image } from "expo-image";
+import { getSongThumbnailUri } from "../../lib/network/util";
 
 interface Props {
   showModal: boolean;
@@ -48,7 +49,7 @@ function TrackOptions({ showModal, closeModalHandler, targetTrack }: Props) {
     >
       <View style={styles.trackContainer}>
         <Image
-          source={require("../../assets/unknown_artist.png")}
+          source={{ uri: getSongThumbnailUri(targetTrack) }}
           style={styles.imageContainer}
         />
         <Text style={styles.title}>{targetTrack.title}</Text>
@@ -72,15 +73,15 @@ const styles = StyleSheet.create({
   trackContainer: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 20,
+    padding: 12,
     columnGap: 20,
     borderBottomWidth: 1,
     borderBottomColor: colors.base300,
   },
   imageContainer: {
-    width: 60,
-    height: 60,
-    borderRadius: 8,
+    width: 64,
+    height: 64,
+    borderRadius: 2,
   },
   title: {
     width: 200,
