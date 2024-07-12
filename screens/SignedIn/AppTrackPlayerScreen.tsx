@@ -16,7 +16,7 @@ function AppTrackPlayerScreen() {
   const activeTrack = useActiveTrack();
   const playerState = usePlaybackState();
 
-  const isPaused = playerState.state === State.Paused;
+  const isPlaying = playerState.state === State.Playing;
 
   if (!activeTrack) {
     return (
@@ -29,7 +29,7 @@ function AppTrackPlayerScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.trackContainer}>
-        {isPaused && (
+        {!isPlaying && (
           <>
             <View style={styles.trackInfoContainer}>
               <Text style={styles.title}>{activeTrack.title!}</Text>
