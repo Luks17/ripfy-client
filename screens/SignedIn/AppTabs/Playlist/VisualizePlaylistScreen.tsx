@@ -14,6 +14,7 @@ import SearchBar from "../../../../components/core/SearchBar";
 import { colors } from "../../../../lib/constants/colors";
 import { useGetPlaylistSongsQuery } from "../../../../lib/hooks/queries/playlists/useGetPlaylistSongsQuery";
 import PlaylistTrackOptions from "../../../../components/options-menus/PlaylistTrackOptions";
+import { loadAndPlay } from "../../../../lib/track-player/controls";
 
 type Props = NativeStackScreenProps<
   PlaylistStackParamList,
@@ -48,8 +49,18 @@ function VisualizePlaylistScreen({ navigation, route }: Props) {
   };
   const closeModal = () => setIsModalOpen(false);
 
+  async function handleTrackPress(song: Song) {
+    await loadAndPlay(song);
+  }
+
   function renderTrack({ item }: ListRenderItemInfo<Song>) {
-    return <Track song={item} longPressHandler={openModal} />;
+    return (
+      <Track
+        song={item}
+        pressHandler={handleTrackPress}
+        longPressHandler={openModal}
+      />
+    );
   }
 
   return (
