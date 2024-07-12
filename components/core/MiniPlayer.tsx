@@ -6,10 +6,10 @@ import { Image } from "expo-image";
 import MovingText from "../animated/MovingText";
 import { addOpacity } from "../../lib/ui/utils";
 import { useNavigation } from "@react-navigation/native";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import type { SignedInStackParamList } from "../../lib/navigation/signedInStack";
+import type { StackNavigationProp } from "@react-navigation/stack";
 
-type SignedInNavigationProps = NativeStackNavigationProp<
+type SignedInNavigationProps = StackNavigationProp<
   SignedInStackParamList,
   "AppTabs"
 >;

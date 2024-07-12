@@ -1,9 +1,8 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createStackNavigator } from "@react-navigation/stack";
 
 export type SignedInStackParamList = {
   AppTabs: undefined;
   AppTrackPlayer: undefined;
 };
 
-export const SignedInStack =
-  createNativeStackNavigator<SignedInStackParamList>();
+export const SignedInStack = createStackNavigator<SignedInStackParamList>();

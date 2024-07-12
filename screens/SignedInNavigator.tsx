@@ -5,6 +5,10 @@ import Config from "../lib/network/config";
 import { SignedInStack } from "../lib/navigation/signedInStack";
 import AppTabsNavigator from "./SignedIn/AppTabsNavigator";
 import AppTrackPlayerScreen from "./SignedIn/AppTrackPlayerScreen";
+import {
+  CardStyleInterpolators,
+  TransitionSpecs,
+} from "@react-navigation/stack";
 
 function SignedInNavigator() {
   const { authenticate, clearSession } = useContext(AuthContext);
@@ -23,10 +27,14 @@ function SignedInNavigator() {
       <SignedInStack.Screen
         name="AppTrackPlayer"
         options={{
-          presentation: "card",
+          presentation: "modal",
+          transitionSpec: {
+            open: TransitionSpecs.TransitionIOSSpec,
+            close: TransitionSpecs.TransitionIOSSpec,
+          },
+          cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
           gestureEnabled: true,
           gestureDirection: "vertical",
-          animationDuration: 400,
         }}
         component={AppTrackPlayerScreen}
       />
