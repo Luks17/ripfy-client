@@ -30,7 +30,7 @@ function MovingText({ text, textLengthThreshold, style }: MovingTextProps) {
       withSequence(
         withDelay(
           5000,
-          withTiming(-textWidth, { duration: 9000, easing: Easing.ease })
+          withTiming(-textWidth, { duration: 9000, easing: Easing.linear })
         ),
         withDelay(
           5000,
