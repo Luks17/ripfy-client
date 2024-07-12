@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import type { Playlist as PlaylistType } from "../../lib/constants/responses/playlist";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import type { PlaylistStackParamList } from "../../lib/navigation/playlistStack";
+import PlaylistOptions from "../options-menus/PlaylistOptions";
 import { Image } from "expo-image";
 
 interface Props {
@@ -40,11 +41,7 @@ function Playlist({ playlist }: Props) {
           <Text style={styles.desc}>{playlist.songs_number} músicas</Text>
         </View>
         <View style={styles.iconContainer}>
-          <IconBtn
-            icon="dots-three-vertical"
-            size={16}
-            color={colors.baseContent}
-          />
+          <PlaylistOptions targetPlaylist={playlist} />
         </View>
       </Pressable>
     </View>
