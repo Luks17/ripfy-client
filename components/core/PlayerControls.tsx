@@ -22,8 +22,11 @@ interface Props {
 }
 
 function getFormattedTime(timeInSecs: number) {
-  const minutes = Math.floor(timeInSecs / 60);
-  const seconds = Math.floor(timeInSecs) - minutes * 60;
+  let minutes: number | string = Math.floor(timeInSecs / 60);
+  let seconds: number | string = Math.floor(timeInSecs) - minutes * 60;
+
+  if (minutes < 10) minutes = `0${minutes}`;
+  if (seconds < 10) seconds = `0${seconds}`;
 
   return `${minutes}:${seconds}`;
 }
